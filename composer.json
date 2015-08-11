@@ -1,33 +1,31 @@
 {
-    "name": "symfony/symfony-demo",
-    "license": "MIT",
+    "name": "moriorgames/browser-moba",
     "type": "project",
-    "description": "Symfony Demo Application",
+    "description": "A browser moba game built on top of Symfony",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
     "require": {
         "php"                                  : ">=5.3.9",
-        "ext-pdo_sqlite"                       : "*",
+        "doctrine/orm"                         : "~2.4",
+        "doctrine/dbal"                        : "~2.4",
         "doctrine/doctrine-bundle"             : "~1.5",
         "doctrine/doctrine-fixtures-bundle"    : "~2.2",
-        "doctrine/orm"                         : "~2.4",
-        "erusev/parsedown"                     : "~1.5",
         "incenteev/composer-parameter-handler" : "~2.1",
         "ircmaxell/password-compat"            : "~1.0",
-        "leafo/scssphp"                        : "~0.1.5",
-        "patchwork/jsqueeze"                   : "~1.0",
         "sensio/distribution-bundle"           : "~3.0.28",
         "sensio/framework-extra-bundle"        : "~3.0",
         "symfony/assetic-bundle"               : "~2.6",
         "symfony/monolog-bundle"               : "~2.7",
         "symfony/swiftmailer-bundle"           : "~2.3",
-        "symfony/symfony"                      : "~2.7",
+        "symfony/symfony"                      : "2.8.x-dev",
+        "friendsofsymfony/user-bundle"         : "v2.0.0-alpha1",
         "twig/extensions"                      : "~1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
     },
+    "minimum-stability": "dev",
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
