@@ -42,9 +42,9 @@ foreach ($symfonyRequirements->getRecommendations() as $req) {
 }
 
 if ($checkPassed) {
-    echo_block('success', 'OK', 'Your system is ready to run Symfony2 projects', true);
+    echo_block('success', 'OK', 'Your system is ready to run Symfony2 projects');
 } else {
-    echo_block('error', 'ERROR', 'Your system is not ready to run Symfony2 projects', true);
+    echo_block('error', 'ERROR', 'Your system is not ready to run Symfony2 projects');
 
     echo_title('Fix the following mandatory requirements', 'red');
 
@@ -68,7 +68,7 @@ echo_style('title', '~~~~');
 echo '  than the one used with your web server. To be on the'.PHP_EOL;
 echo '      safe side, please check the requirements from your web'.PHP_EOL;
 echo '      server using the ';
-echo_style('yellow', 'web/check.php');
+echo_style('yellow', 'web/config.php');
 echo ' script.'.PHP_EOL;
 echo PHP_EOL;
 

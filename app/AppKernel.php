@@ -7,11 +7,9 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        // When you install a third-party bundle or create a new bundle in your
-        // application, you must add it in the following array to register it
-        // in the application. Otherwise, the bundle won't be enabled and you
-        // won't be able to use it.
         $bundles = array(
+
+            // Symfony application bundles
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -21,7 +19,13 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+
+            // Useful third party bundles
+            new FOS\UserBundle\FOSUserBundle(),
+
+            // My bundles
             new AppBundle\AppBundle(),
+            new MoriorGames\UserBundle\UserBundle(),
         );
 
         // Some bundles are only used while developing the application or during
