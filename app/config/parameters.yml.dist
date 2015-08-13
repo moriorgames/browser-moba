@@ -3,25 +3,14 @@
 # used by the application.
 # See http://symfony.com/doc/current/best_practices/configuration.html#canonical-parameters
 parameters:
-    # this demo application uses an embedded SQLite database to simplify setup.
-    # in a real Symfony application you probably will use a MySQL or PostgreSQL database
-    database_driver:   pdo_sqlite
+
+    database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:     moba
     database_user:     root
     database_password: ~
-    # the 'database_path' is only used for SQLite type databases
-    database_path:     %kernel.root_dir%/data/blog.sqlite
 
-    # Uncomment these lines to use a MySQL database instead of SQLite:
-    #
-    # database_driver: pdo_mysql
-    # database_host: 127.0.0.1
-    # database_port: null
-    # database_name: symfony_demo
-    # database_user: root
-    # database_password: null
     #
     # You can even create the database and load the sample data from the command line:
     #
