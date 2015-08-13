@@ -1,5 +1,7 @@
 <?php
 
+umask(0002);
+
 // This is the front controller used when executing the application in the
 // production environment ('prod'). See
 //

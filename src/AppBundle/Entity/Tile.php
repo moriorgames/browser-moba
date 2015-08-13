@@ -6,15 +6,25 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class Map
+ * Class Tile
  * @package AppBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="m_map")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MapRepository")
+ * @ORM\Table(name="m_tile")
  */
-class Map
+class Tile
 {
+
+    const TYPE_BLUE_HOME = 0;
+    const TYPE_BLUE_CASTLE = 1;
+    const TYPE_BLUE_TOWER = 2;
+    const TYPE_RED_HOME = 3;
+    const TYPE_RED_CASTLE = 4;
+    const TYPE_RED_TOWER = 5;
+    const TYPE_NPC = 6;
+    const TYPE_GRASS = 7;
+    const TYPE_WOODS = 8;
+
     /**
      * @var integer
      *
@@ -41,23 +51,9 @@ class Map
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", options={"default"=0})
+     * @ORM\Column(name="tile_type", type="integer")
      */
-    private $height;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer", options={"default"=0})
-     */
-    private $width;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(type="boolean")
-     */
-    private $enabled;
+    private $tileType;
 
     /**
      * @ORM\OneToMany(targetEntity="MapTile", mappedBy="map", cascade={"persist"})
@@ -128,56 +124,18 @@ class Map
     /**
      * @return integer
      */
-    public function getHeight()
+    public function getTileType()
     {
-        return $this->height;
+        return $this->tileType;
     }
 
     /**
-     * @param integer $height
+     * @param integer $tileType
      * @return $this
      */
-    public function setHeight($height)
+    public function setTileType($tileType)
     {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * @param integer $width
-     * @return $this
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * @param boolean $enabled
-     * @return $this
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
+        $this->tileType = $tileType;
 
         return $this;
     }

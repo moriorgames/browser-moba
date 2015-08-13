@@ -2,12 +2,12 @@
 
 namespace MoriorGames\UserBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="_user")
+ * @ORM\Table(name="u_user")
  */
 class User extends BaseUser
 {
