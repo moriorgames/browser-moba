@@ -19,7 +19,7 @@
         "symfony/monolog-bundle"               : "~2.7",
         "symfony/swiftmailer-bundle"           : "~2.3",
         "symfony/symfony"                      : "2.8.x-dev",
-        "friendsofsymfony/user-bundle"         : "v2.0.0-alpha1",
+        "friendsofsymfony/user-bundle"         : "2.0.x-dev",
         "twig/extensions"                      : "~1.2"
     },
     "require-dev": {
