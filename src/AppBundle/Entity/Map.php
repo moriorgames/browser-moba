@@ -60,7 +60,7 @@ class Map
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="MapTile", mappedBy="map", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MapTile", mappedBy="map", cascade={"persist"})
      */
     protected $mapTiles;
 

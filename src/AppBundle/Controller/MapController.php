@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Map;
+use AppBundle\Manager\MapManager;
+use AppBundle\Repository\MapRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,7 +44,25 @@ class MapController extends Controller
      */
     public function editAction($id)
     {
-        return $this->render('map/edit.html.twig');
+        /** @var MapRepository $repo */
+        $repo = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Map');
+
+        $map = $repo->findOneById($id);
+
+        if (!$map instanceof Map) {
+            throw $this->createNotFoundException('Map not found!');
+        }
+
+        $mapManager = new MapManager();
+
+        return $this->render('map/edit.html.twig',
+            array(
+                'tiles' => $mapManager->createView($map)
+            )
+        );
     }
 
 }

@@ -46,7 +46,7 @@ class Tile
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $slug;
+    private $class;
 
     /**
      * @var integer
@@ -56,7 +56,7 @@ class Tile
     private $tileType;
 
     /**
-     * @ORM\OneToMany(targetEntity="MapTile", mappedBy="map", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MapTile", mappedBy="tile", cascade={"persist"})
      */
     protected $mapTiles;
 
@@ -103,20 +103,20 @@ class Tile
      *
      * @return string
      */
-    public function getSlug()
+    public function getClass()
     {
-        return $this->slug;
+        return $this->class;
     }
 
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param string $class
      * @return $this
      */
-    public function setSlug($slug)
+    public function setClass($class)
     {
-        $this->slug = $slug;
+        $this->class = $class;
 
         return $this;
     }

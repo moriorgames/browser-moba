@@ -6,17 +6,18 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
-            <div class="jumbotron">
-                <p>
-                    {{ 'help.browse_app'|trans|raw }}
-                </p>
-                <p>
-                    <a class="btn btn-primary btn-lg" href="{{ path('homepage') }}">
-                        <i class="fa fa-users"></i> {{ 'action.browse_app'|trans }}
-                    </a>
-                </p>
+        <div class="col-sm-12">
+
+            <div id="map_container">
+
+                {% for tile in tiles %}
+                    <a href="#" class="tile {{ tile.class }}"
+                       style="top:{{ tile.top }}px;left:{{ tile.left }}px"
+                            title="{{ tile.title }}">&nbsp;</a>
+                {% endfor %}
+
             </div>
+
         </div>
     </div>
 {% endblock %}
