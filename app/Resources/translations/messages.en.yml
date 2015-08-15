@@ -4,17 +4,10 @@ tip: TIP
 not_available: Not available
 mit_license: MIT License
 
+project_name: Browser moba
+
 title:
-    homepage: Welcome to the <strong>Symfony Demo</strong> application
-    source_code: Source code used to render this page
-    controller_code: Controller code
-    twig_template_code: Twig template code
-    login: Secure Sign in
-    post_list: Post List
-    edit_post: 'Edit post #%id%'
-    add_comment: Add a comment
-    comment_error: There was an error publishing your comment
-    post_new: Post creation
+    homepage: Welcome to the <strong>Browser moba</strong> application
 
 action:
     show: Show
@@ -45,17 +38,10 @@ label:
     actions: Actions
 
 menu:
-    post_list: Post list
-    back_to_blog: Back to blog
     homepage: Homepage
+    map: Map index
     admin: Backend
     logout: Logout
-
-post:
-    to_publish_a_comment: to publish a comment
-    num_comments: '%count% comment|%count% comments'
-    commented_on: commented on
-    no_comments: Be the first to comment on this post.
 
 help:
     app_description: This is a <strong>demo application</strong> built in the Symfony Framework to illustrate the recommended way of developing Symfony applications.

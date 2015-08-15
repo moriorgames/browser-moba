@@ -1,0 +1,10 @@
+
+/* ==================== */
+/*         MENU         */
+/* ==================== */
+.navbar-default .navbar-nav > .current > a,
+.navbar-default .navbar-nav > .current > a:hover,
+.navbar-default .navbar-nav > .current > a:focus {
+    color: #fff;
+    background-color: #1a252f;
+}
