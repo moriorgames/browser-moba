@@ -1,0 +1,75 @@
+
+note: NOTE
+tip: TIP
+not_available: Not available
+mit_license: MIT License
+
+title:
+    homepage: Welcome to the <strong>Symfony Demo</strong> application
+    source_code: Source code used to render this page
+    controller_code: Controller code
+    twig_template_code: Twig template code
+    login: Secure Sign in
+    post_list: Post List
+    edit_post: 'Edit post #%id%'
+    add_comment: Add a comment
+    comment_error: There was an error publishing your comment
+    post_new: Post creation
+
+action:
+    show: Show
+    show_code: Show code
+    edit: Edit
+    edit_post: Edit post
+    save: Save changes
+    delete_post: Delete post
+    create_post: Create a new post
+    back_to_list: Back to the post list
+    publish_comment: Publish comment
+    sign_in: Sign in
+    browse_app: Browse application
+    browse_admin: Browse backend
+    edit_contents: Edit contents
+
+label:
+    create_post: Create post
+    title: Title
+    author: Author
+    author_email: Author email
+    username: Username
+    password: Password
+    role: Role
+    content: Content
+    summary: Summary
+    published_at: Published at
+    actions: Actions
+
+menu:
+    post_list: Post list
+    back_to_blog: Back to blog
+    homepage: Homepage
+    admin: Backend
+    logout: Logout
+
+post:
+    to_publish_a_comment: to publish a comment
+    num_comments: '%count% comment|%count% comments'
+    commented_on: commented on
+    no_comments: Be the first to comment on this post.
+
+help:
+    app_description: This is a <strong>demo application</strong> built in the Symfony Framework to illustrate the recommended way of developing Symfony applications.
+    show_code: Click on this button to show the source code of the <strong>Controller</strong> and <strong>template</strong> used to render this page.
+    browse_app: Browse the <strong>public section</strong> of the demo application.
+    browse_admin: Browse the <strong>admin backend</strong> of the demo application.
+    login_users: Try either of the following users
+    role_user: regular user
+    role_admin: administrator
+    reload_fixtures: 'If these users don''t work, reload application fixtures by running this command from the terminal:'
+    add_user: 'If you want to create new users, run this other command:'
+    more_information: For more information, check out the <a href="http://symfony.com/doc">Symfony doc</a>.
+
+map:
+    title_index: Map index
+    title_create: Map create
+    title_edit: Map edit

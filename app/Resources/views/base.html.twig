@@ -22,7 +22,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
 
-    <body id="{% block body_id %}{% endblock %}">
+    <body id="{% block body_id %}{{ app.request.get('_route') }}{% endblock %}">
 
         {% block header %}
             <header>
