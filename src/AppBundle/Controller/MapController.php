@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Map;
 use AppBundle\Manager\MapManager;
 use AppBundle\Repository\MapRepository;
+use AppBundle\Repository\MapTileRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -79,28 +80,35 @@ class MapController extends Controller
     public function tileByTileAction(Request $request)
     {
         $id = $request->get('id');
-        $top = $request->get('x');
-        $left = $request->get('y');
+        $x = $request->get('x');
+        $y = $request->get('y');
 
         /** @var MapRepository $repo */
-        $repo = $this
+        $mapRepo = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Map');
 
-        $map = $repo->findOneById($id);
+        $map = $mapRepo->findOneById($id);
 
         if (!$map instanceof Map) {
             throw $this->createNotFoundException('Map not found!');
         }
 
-        $mapManager = new MapManager();
+        /** @var MapTileRepository $repo */
+        $mapTileRepo = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:MapTile');
+        $mapTileRepo->insertPosition($x, $y, $map);
 
-        return $this->render('map/edit.html.twig',
-            array(
-                'tiles' => $mapManager->createView($map)
-            )
+        // Create a JSON-response with a 200 status code
+        $response = new Response(
+            json_encode(array('status' => true))
         );
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 }

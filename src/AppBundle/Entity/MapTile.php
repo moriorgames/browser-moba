@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Class MapTile
  * @package AppBundle\Entity
  *
- * @ORM\Entity
  * @ORM\Table(name="m_map_tile")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MapTileRepository")
  */
 class MapTile
 {
@@ -43,14 +43,14 @@ class MapTile
      *
      * @ORM\Column(type="integer", options={"default"=0})
      */
-    private $top;
+    private $x;
 
     /**
      * @var integer
      *
      * @ORM\Column(type="integer", options={"default"=0})
      */
-    private $left;
+    private $y;
 
     /**
      * @return int
@@ -101,18 +101,18 @@ class MapTile
     /**
      * @return int
      */
-    public function getTop()
+    public function getX()
     {
-        return $this->top;
+        return $this->x;
     }
 
     /**
-     * @param int $top
+     * @param int $x
      * @return $this
      */
-    public function setTop($top)
+    public function setX($x)
     {
-        $this->top = $top;
+        $this->x = $x;
 
         return $this;
     }
@@ -120,18 +120,18 @@ class MapTile
     /**
      * @return int
      */
-    public function getLeft()
+    public function getY()
     {
-        return $this->left;
+        return $this->y;
     }
 
     /**
-     * @param int $left
+     * @param int $y
      * @return $this
      */
-    public function setLeft($left)
+    public function setY($y)
     {
-        $this->left = $left;
+        $this->y = $y;
 
         return $this;
     }
