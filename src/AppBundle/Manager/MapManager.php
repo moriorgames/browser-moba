@@ -35,7 +35,8 @@ class MapManager
                     'class' => 'grass',
                     'top' => self::INCREMENTAL_TOP * $top,
                     'left' => self::INCREMENTAL_LEFT * $left + 20,
-                    'title' => "$top x $left",
+                    'y' => $top,
+                    'x' => $left,
                 ];
 
             }

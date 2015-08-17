@@ -12,6 +12,7 @@
 /* ==================== */
 /*       GENERAL        */
 /* ==================== */
+a, a:hover, a:visited, a:active {text-decoration: none}
 .container.body-container{
     width: 1000px;
 }
@@ -23,6 +24,7 @@ header {
     margin: 0 0 5px 0;
     border-bottom: 1px solid gray;
 }
+
 
 /* ==================== */
 /*         MAP          */
@@ -41,8 +43,6 @@ header {
     height: 112px;
     width: 112px;
 }
-
-.tile:hover {text-decoration: none}
 
 #map_container .tile.blue_home {background-image: url('../images/map/blue_home.png')}
 #map_container .tile.blue_castle {background-image: url('../images/map/blue_castle.png')}
