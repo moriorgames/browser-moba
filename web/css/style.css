@@ -37,19 +37,32 @@ header {
     width: 990px;
 }
 
-#map_container .tile {
+.tools .tile.active {
+    border: 1px solid red;
+}
+.tools .tile {
+    border: 1px solid black;
+    display: block;
+    position: relative;
+    float: left;
+    margin: 1px;
+    height: 100px;
+    width: 100px;
+}
+
+.tile {
     display: block;
     position: absolute;
     height: 112px;
     width: 112px;
 }
 
-#map_container .tile.blue_home {background-image: url('../images/map/blue_home.png')}
-#map_container .tile.blue_castle {background-image: url('../images/map/blue_castle.png')}
-#map_container .tile.blue_tower {background-image: url('../images/map/blue_tower.png')}
-#map_container .tile.red_home {background-image: url('../images/map/red_home.png')}
-#map_container .tile.red_castle {background-image: url('../images/map/red_castle.png')}
-#map_container .tile.red_tower {background-image: url('../images/map/red_tower.png')}
-#map_container .tile.npc {background-image: url('../images/map/npc.png')}
-#map_container .tile.grass {background-image: url('../images/map/grass.png')}
-#map_container .tile.woods {background-image: url('../images/map/woods.png')}
+.tile.blue_home {background-image: url('../images/map/blue_home.png')}
+.tile.blue_castle {background-image: url('../images/map/blue_castle.png')}
+.tile.blue_tower {background-image: url('../images/map/blue_tower.png')}
+.tile.red_home {background-image: url('../images/map/red_home.png')}
+.tile.red_castle {background-image: url('../images/map/red_castle.png')}
+.tile.red_tower {background-image: url('../images/map/red_tower.png')}
+.tile.npc {background-image: url('../images/map/npc.png')}
+.tile.grass {background-image: url('../images/map/grass.png')}
+.tile.woods {background-image: url('../images/map/woods.png')}

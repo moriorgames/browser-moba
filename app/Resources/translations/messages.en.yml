@@ -59,3 +59,10 @@ map:
     title_index: Map index
     title_create: Map create
     title_edit: Map edit
+    table:
+        id: Id
+        name: Map name
+        height: Map Height
+        width: Map Width
+        action: Action
+        edit_link: Edit

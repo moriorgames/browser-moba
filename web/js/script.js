@@ -4,6 +4,19 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
+
+    /** MAP EDIT TILE BY TILE JAVASCRIPT **/
+    var toolId = 1;
+    $('.tools a').click(function () {
+
+        $('.tools a').each(function () {
+            $(this).removeClass('active');
+        });
+        $(this).addClass('active');
+        toolId = $(this).attr('data-id');
+
+    });
+
     // Map Tile by tile
     $('.tile-by-tile a').click(function () {
 
@@ -12,9 +25,12 @@ $(document).ready(function () {
         var data = {
             id: $('#_map_id').val(),
             x: $(this).attr('data-x'),
-            y: $(this).attr('data-y')
+            y: $(this).attr('data-y'),
+            tileId: toolId
         };
-        console.log( $(this).attr('data-top') );
+
+        $(this).removeClass();
+        $(this).addClass($('#tool_' + toolId).attr('class'));
         $.post(url, data, function (data) {
             $(".result").html(data);
         });

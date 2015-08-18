@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Map;
-use AppBundle\Manager\MapManager;
+use AppBundle\Entity\Tile;
 use AppBundle\Repository\MapRepository;
 use AppBundle\Repository\MapTileRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,12 @@ class MapController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('map/index.html.twig');
+        $mapManager = $this->get('app.map_manager');
+
+        return $this->render('map/index.html.twig', array(
+                'maps' => $mapManager->mapRepository()->findAll()
+            )
+        );
     }
 
     /**
@@ -49,11 +54,10 @@ class MapController extends Controller
      */
     public function editAction($id)
     {
+        $mapManager = $this->get('app.map_manager');
+
         /** @var MapRepository $repo */
-        $repo = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Map');
+        $repo = $mapManager->mapRepository();
 
         $map = $repo->findOneById($id);
 
@@ -61,12 +65,11 @@ class MapController extends Controller
             throw $this->createNotFoundException('Map not found!');
         }
 
-        $mapManager = new MapManager();
-
         return $this->render('map/edit.html.twig',
             array(
                 'map' => $map,
-                'tiles' => $mapManager->createView($map),
+                'mapTiles' => $mapManager->createView($map),
+                'tiles' => $mapManager->getTiles(),
             )
         );
     }
@@ -79,15 +82,21 @@ class MapController extends Controller
      */
     public function tileByTileAction(Request $request)
     {
+        $mapManager = $this->get('app.map_manager');
+
         $id = $request->get('id');
         $x = $request->get('x');
         $y = $request->get('y');
 
+        /** @var Tile $tile */
+        foreach ($mapManager->getTiles() as $tile) {
+            if ($tile->getId() == $request->get('tileId')) {
+                break;
+            }
+        }
+
         /** @var MapRepository $repo */
-        $mapRepo = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Map');
+        $mapRepo = $mapManager->mapRepository();
 
         $map = $mapRepo->findOneById($id);
 
@@ -100,7 +109,7 @@ class MapController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:MapTile');
-        $mapTileRepo->insertPosition($x, $y, $map);
+        $mapTileRepo->insertPosition($x, $y, $map, $tile);
 
         // Create a JSON-response with a 200 status code
         $response = new Response(

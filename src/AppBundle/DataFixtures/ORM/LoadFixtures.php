@@ -55,6 +55,14 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
     {
         $tile = new Tile();
         $tile
+            ->setName('Grass')
+            ->setClass('grass')
+            ->setTileType(Tile::TYPE_GRASS);
+        $manager->persist($tile);
+        $manager->flush();
+
+        $tile = new Tile();
+        $tile
             ->setName('Blue Home')
             ->setClass('blue_home')
             ->setTileType(Tile::TYPE_BLUE_HOME);
@@ -106,14 +114,6 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
             ->setName('Npc')
             ->setClass('npc')
             ->setTileType(Tile::TYPE_NPC);
-        $manager->persist($tile);
-        $manager->flush();
-
-        $tile = new Tile();
-        $tile
-            ->setName('Grass')
-            ->setClass('grass')
-            ->setTileType(Tile::TYPE_GRASS);
         $manager->persist($tile);
         $manager->flush();
 

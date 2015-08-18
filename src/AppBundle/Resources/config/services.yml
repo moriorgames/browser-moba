@@ -1,0 +1,6 @@
+services:
+
+    app.map_manager:
+        class: AppBundle\Manager\MapManager
+        arguments:
+            - @doctrine.orm.entity_manager
