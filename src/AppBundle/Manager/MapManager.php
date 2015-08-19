@@ -50,9 +50,11 @@ class MapManager
                     continue;
                 }
 
+                $mapTile = $this->getMapTile($left, $top, $map);
+
                 $tiles[] = [
-                    'id' => 'x_' . $left . '_y_' . $top,
-                    'class' => 'grass',
+                    'id' => MapManager::generateIdTile($mapTile),
+                    'class' => $mapTile->getTile()->getClass(),
                     'top' => self::INCREMENTAL_TOP * $top,
                     'left' => self::INCREMENTAL_LEFT * $left + 20,
                     'y' => $top,
@@ -82,5 +84,49 @@ class MapManager
     public function mapRepository()
     {
         return $this->em->getRepository('AppBundle:Map');
+    }
+
+    /**
+     * @param $x
+     * @param $y
+     * @param Map $map
+     * @return MapTile
+     */
+    public function getMapTile($x, $y, Map $map)
+    {
+        $mapTile = $this->em
+            ->getRepository('AppBundle:MapTile')
+            ->findOneBy(
+                [
+                    'x' => $x,
+                    'y' => $y,
+                    'map' => $map,
+                ]
+            );
+
+        if (!$mapTile instanceof MapTile) {
+            $tile = $this->em
+                ->getRepository('AppBundle:Tile')
+                ->findOneByTileType(Tile::TYPE_GRASS);
+            $mapTile = new MapTile();
+            $mapTile
+                ->setMap($map)
+                ->setX($x)
+                ->setY($y)
+                ->setTile($tile);
+        }
+
+        return $mapTile;
+    }
+
+    /**
+     * Standard method to generate id for tiles
+     *
+     * @param MapTile $mapTile
+     * @return string
+     */
+    public static function generateIdTile(MapTile $mapTile)
+    {
+        return 'x_' . $mapTile->getX() . '_y_' . $mapTile->getY();
     }
 }

@@ -24,7 +24,10 @@ header {
     margin: 0 0 5px 0;
     border-bottom: 1px solid gray;
 }
-
+h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
 
 /* ==================== */
 /*         MAP          */
@@ -33,21 +36,22 @@ header {
     background: #071c3d;
     padding: 5px;
     position: relative;
-    height: 690px;
+    height: 630px;
     width: 990px;
 }
 
 .tools .tile.active {
-    border: 1px solid red;
+    border: 2px solid red;
+    width: 112px;
 }
 .tools .tile {
-    border: 1px solid black;
+    border: 2px solid black;
     display: block;
     position: relative;
     float: left;
-    margin: 1px;
-    height: 100px;
-    width: 100px;
+    margin: 2px 1px;
+    height: 90px;
+    width: 105px;
 }
 
 .tile {
