@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Map
@@ -28,6 +29,7 @@ class Map
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="map.blank_name")
      */
     private $name;
 
@@ -42,6 +44,7 @@ class Map
      * @var integer
      *
      * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
      */
     private $height;
 
@@ -49,6 +52,7 @@ class Map
      * @var integer
      *
      * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
      */
     private $width;
 

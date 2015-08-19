@@ -2,21 +2,30 @@
 
 {% block body %}
     <div class="page-header">
-        <h1>{{ 'map.title_create'|trans|raw }}</h1>
+        <h1>{{ 'map.title_index'|trans|raw }}</h1>
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
-            <div class="jumbotron">
-                <p>
-                    {{ 'help.browse_app'|trans|raw }}
-                </p>
-                <p>
-                    <a class="btn btn-primary btn-lg" href="{{ path('homepage') }}">
-                        <i class="fa fa-users"></i> {{ 'action.browse_app'|trans }}
-                    </a>
-                </p>
-            </div>
+        <div class="col-sm-12">
+
+            {{ form_start(form, { method: 'POST', action: path('map_create') }) }}
+            {#  instead of displaying form fields one by one, you can also display them
+                all with their default options and styles just by calling to this function:
+                {{ form_widget(form) }}
+            #}
+
+            <fieldset>
+                <legend>{{ 'title.add_comment'|trans }}</legend>
+
+                {{ form_widget(form) }}
+
+                <div class="form-group">
+                    <button class="btn btn-primary pull-right" type="submit">{{ 'action.publish_comment'|trans }}</button>
+                </div>
+            </fieldset>
+            {{ form_end(form) }}
+
         </div>
+
     </div>
 {% endblock %}

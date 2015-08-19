@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Map;
 use AppBundle\Entity\Tile;
+use AppBundle\Form\MapType;
 use AppBundle\Repository\MapRepository;
 use AppBundle\Repository\MapTileRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +44,13 @@ class MapController extends Controller
      */
     public function createAction()
     {
-        return $this->render('map/create.html.twig');
+        $form = $this->createForm(new MapType());
+
+        return $this->render('map/create.html.twig',
+            array(
+                'form' => $form->createView()
+            )
+        );
     }
 
     /**
