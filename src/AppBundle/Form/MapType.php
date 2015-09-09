@@ -19,11 +19,11 @@ class MapType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'label.name'))
-            ->add('slug', null, array('label' => 'label.slug'))
-            ->add('height', null, array('label' => 'label.height'))
-            ->add('width', null, array('label' => 'label.width'))
-            ->add('enabled', null, array('label' => 'label.enabled'));
+            ->add('name', null, array('label' => 'map.form.name'))
+            ->add('slug', null, array('label' => 'map.form.slug'))
+            ->add('height', null, array('label' => 'map.form.height'))
+            ->add('width', null, array('label' => 'map.form.width'))
+            ->add('enabled', null, array('label' => 'map.form.enabled'));
     }
 
     /**

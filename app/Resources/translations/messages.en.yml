@@ -59,6 +59,7 @@ map:
     title_index: Map index
     title_create: Map create
     title_edit: Map edit
+    sub_title_create: Crea un nuevo mapa
     table:
         id: Id
         name: Map name
@@ -66,3 +67,10 @@ map:
         width: Map Width
         action: Action
         edit_link: Edit
+    form:
+        name:       Nombre
+        slug:       Slug
+        height:     Altura
+        width:      Anchura
+        enabled:    Activo
+        submit_create: Crear mapa
