@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Controller used to manage blog contents in the public part of the site.
@@ -22,8 +23,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
  */
 class MapController extends Controller
 {
+
     /**
      * @Route("/", name="map_index")
+     * @Template("map/index.html.twig")
      *
      * @return Response
      */
@@ -31,14 +34,39 @@ class MapController extends Controller
     {
         $mapManager = $this->get('app.map_manager');
 
-        return $this->render('map/index.html.twig', array(
-                'maps' => $mapManager->mapRepository()->findAll()
-            )
-        );
+        return ['maps' => $mapManager->mapRepository()->findAll()];
+    }
+
+    /**
+     * @Route("/edit/{id}", name="map_edit")
+     * @Template("map/edit.html.twig")
+     *
+     * @param integer $id
+     *
+     * @return Response
+     */
+    public function editAction($id)
+    {
+        $mapManager = $this->get('app.map_manager');
+
+        /** @var Map $map */
+        $map = $mapManager
+            ->mapRepository()
+            ->findOneBy(['id' => $id]);
+
+        $this->checkInstanceOfMap($map);
+
+        return [
+            'map'      => $map,
+            'mapTiles' => $mapManager->createView($map),
+            'tiles'    => $mapManager->getTiles(),
+        ];
     }
 
     /**
      * @Route("/create", name="map_create")
+     * @Template("map/create.html.twig")
+     * @Method("GET")
      *
      * @return Response
      */
@@ -46,45 +74,47 @@ class MapController extends Controller
     {
         $form = $this->createForm(new MapType());
 
-        return $this->render('map/create.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
-     * @Route("/edit/{id}", name="map_edit")
+     * @Route("/create", name="map_update")
+     * @Template("map/create.html.twig")
+     * @Method("POST")
      *
-     * @param integer $id
+     * @param Request $request
+     *
      * @return Response
      */
-    public function editAction($id)
+    public function updateAction(Request $request)
     {
-        $mapManager = $this->get('app.map_manager');
+        $form = $this->createForm(new MapType());
 
-        /** @var MapRepository $repo */
-        $repo = $mapManager->mapRepository();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        $map = $repo->findOneById($id);
+            /** @var Map $map */
+            $map = $form->getData();
 
-        if (!$map instanceof Map) {
-            throw $this->createNotFoundException('Map not found!');
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($map);
+            $em->flush();
+
+            return $this->redirectToRoute('map_index');
         }
 
-        return $this->render('map/edit.html.twig',
-            array(
-                'map' => $map,
-                'mapTiles' => $mapManager->createView($map),
-                'tiles' => $mapManager->getTiles(),
-            )
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
      * @Route("/tile-by-tile", name="map_tile_by_tile")
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function tileByTileAction(Request $request)
@@ -120,11 +150,27 @@ class MapController extends Controller
 
         // Create a JSON-response with a 200 status code
         $response = new Response(
-            json_encode(array('status' => true))
+            json_encode(['status' => true])
         );
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+
+// --------------------------- PRIVATE METHODS ---------------------------
+
+
+    /**
+     * Check if $map instanceof Map or throw an exception
+     *
+     * @param object $map
+     */
+    private function checkInstanceOfMap($map)
+    {
+        if (!$map instanceof Map) {
+            throw $this->createNotFoundException('Map not found!');
+        }
     }
 
 }
