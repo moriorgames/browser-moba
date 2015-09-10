@@ -20,6 +20,11 @@
                 {{ form_widget(form) }}
 
                 <div class="form-group">
+                    <a href="{{ path('map_index') }}"
+                       class="btn btn-default pull-right" type="submit">{{ 'map.form.return_to_list'|trans }}</a>
+                </div>
+
+                <div class="form-group">
                     <button class="btn btn-primary pull-right" type="submit">{{ 'map.form.submit_create'|trans }}</button>
                 </div>
             </fieldset>

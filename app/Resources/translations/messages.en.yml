@@ -68,9 +68,10 @@ map:
         action: Action
         edit_link: Edit
     form:
-        name:       Nombre
+        name:       Name
         slug:       Slug
-        height:     Altura
-        width:      Anchura
-        enabled:    Activo
-        submit_create: Crear mapa
+        height:     Map Height
+        width:      Map Width
+        enabled:    Is enabled
+        submit_create: Create map
+        return_to_list: Return to list
