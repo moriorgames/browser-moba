@@ -14,16 +14,16 @@ class MapType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'map.form.name'))
-            ->add('slug', null, array('label' => 'map.form.slug'))
-            ->add('height', null, array('label' => 'map.form.height'))
-            ->add('width', null, array('label' => 'map.form.width'))
-            ->add('enabled', null, array('label' => 'map.form.enabled'));
+            ->add('name', null, ['label' => 'map.form.name'])
+            ->add('slug', null, ['label' => 'map.form.slug'])
+            ->add('height', null, ['label' => 'map.form.height'])
+            ->add('width', null, ['label' => 'map.form.width'])
+            ->add('enabled', null, ['label' => 'map.form.enabled']);
     }
 
     /**
@@ -31,11 +31,9 @@ class MapType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'AppBundle\Entity\Map',
-            )
-        );
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\Map',
+        ]);
     }
 
     /**

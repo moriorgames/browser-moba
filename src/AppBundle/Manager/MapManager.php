@@ -5,8 +5,10 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Map;
 use AppBundle\Entity\Tile;
 use AppBundle\Entity\MapTile;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Repository\MapRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class MapManager
@@ -32,7 +34,59 @@ class MapManager
     }
 
     /**
+     * @return Tile[]
+     */
+    public function getTiles()
+    {
+        return $this->em
+            ->getRepository('AppBundle:Tile')
+            ->findAll();
+    }
+
+    /**
+     * Get Map by id or throw exception.
+     *
+     * @param integer $id
+     *
+     * @return Map|NotFoundHttpException
+     */
+    public function getMapById($id)
+    {
+        /** @var Map $map */
+        $map = $this->getMapRepository()
+            ->findOneBy(['id' => $id]);
+
+        if (!$map instanceof Map) {
+            throw new NotFoundHttpException('Map not found!');
+        }
+
+        return $map;
+    }
+
+    /**
+     * @return MapRepository
+     */
+    public function getMapRepository()
+    {
+        return $this->em->getRepository('AppBundle:Map');
+    }
+
+    /**
      * @param Map $map
+     */
+    public function persistMap(Map $map)
+    {
+        try {
+            $this->em->persist($map);
+            $this->em->flush();
+        } catch (ORMException $e) {
+            echo 'Fail when persist: ' . $e->getMessage() . "\n";
+        }
+    }
+
+    /**
+     * @param Map $map
+     *
      * @return array
      */
     public function createView(Map $map)
@@ -53,12 +107,12 @@ class MapManager
                 $mapTile = $this->getMapTile($left, $top, $map);
 
                 $tiles[] = [
-                    'id' => MapManager::generateIdTile($mapTile),
+                    'id'    => MapManager::generateIdTile($mapTile),
                     'class' => $mapTile->getTile()->getClass(),
-                    'top' => self::INCREMENTAL_TOP * $top,
-                    'left' => self::INCREMENTAL_LEFT * $left + 20,
-                    'y' => $top,
-                    'x' => $left,
+                    'top'   => self::INCREMENTAL_TOP * $top,
+                    'left'  => self::INCREMENTAL_LEFT * $left + 20,
+                    'y'     => $top,
+                    'x'     => $left,
                 ];
 
             }
@@ -69,27 +123,10 @@ class MapManager
     }
 
     /**
-     * @return MapRepository
-     */
-    public function getTiles()
-    {
-        return $this->em
-            ->getRepository('AppBundle:Tile')
-            ->findAll();
-    }
-
-    /**
-     * @return MapRepository
-     */
-    public function mapRepository()
-    {
-        return $this->em->getRepository('AppBundle:Map');
-    }
-
-    /**
-     * @param $x
-     * @param $y
+     * @param     $x
+     * @param     $y
      * @param Map $map
+     *
      * @return MapTile
      */
     public function getMapTile($x, $y, Map $map)
@@ -98,8 +135,8 @@ class MapManager
             ->getRepository('AppBundle:MapTile')
             ->findOneBy(
                 [
-                    'x' => $x,
-                    'y' => $y,
+                    'x'   => $x,
+                    'y'   => $y,
                     'map' => $map,
                 ]
             );
@@ -107,7 +144,7 @@ class MapManager
         if (!$mapTile instanceof MapTile) {
             $tile = $this->em
                 ->getRepository('AppBundle:Tile')
-                ->findOneByTileType(Tile::TYPE_GRASS);
+                ->findOneBy(['tileType' => Tile::TYPE_GRASS]);
             $mapTile = new MapTile();
             $mapTile
                 ->setMap($map)
@@ -123,6 +160,7 @@ class MapManager
      * Standard method to generate id for tiles
      *
      * @param MapTile $mapTile
+     *
      * @return string
      */
     public static function generateIdTile(MapTile $mapTile)

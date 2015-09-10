@@ -5,11 +5,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Map;
 use AppBundle\Entity\Tile;
 use AppBundle\Form\MapType;
-use AppBundle\Repository\MapRepository;
+use AppBundle\Manager\MapManager;
 use AppBundle\Repository\MapTileRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,6 +26,23 @@ class MapController extends Controller
 {
 
     /**
+     * @var MapManager
+     */
+    private $mapManager;
+
+    /**
+     * Override the set container to add some controller logic.
+     * This function is called at the initialize of the controller.
+     *
+     * @param ContainerInterface|null $container
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+        $this->mapManager = $this->get('app.map_manager');
+    }
+
+    /**
      * @Route("/", name="map_index")
      * @Template("map/index.html.twig")
      *
@@ -32,9 +50,7 @@ class MapController extends Controller
      */
     public function indexAction()
     {
-        $mapManager = $this->get('app.map_manager');
-
-        return ['maps' => $mapManager->mapRepository()->findAll()];
+        return ['maps' => $this->mapManager->getMapRepository()->findAll()];
     }
 
     /**
@@ -47,19 +63,13 @@ class MapController extends Controller
      */
     public function editAction($id)
     {
-        $mapManager = $this->get('app.map_manager');
-
         /** @var Map $map */
-        $map = $mapManager
-            ->mapRepository()
-            ->findOneBy(['id' => $id]);
-
-        $this->checkInstanceOfMap($map);
+        $map = $this->mapManager->getMapById($id);
 
         return [
             'map'      => $map,
-            'mapTiles' => $mapManager->createView($map),
-            'tiles'    => $mapManager->getTiles(),
+            'mapTiles' => $this->mapManager->createView($map),
+            'tiles'    => $this->mapManager->getTiles(),
         ];
     }
 
@@ -72,10 +82,8 @@ class MapController extends Controller
      */
     public function createAction()
     {
-        $form = $this->createForm(new MapType());
-
         return [
-            'form' => $form->createView(),
+            'form' => $this->createForm(new MapType())->createView(),
         ];
     }
 
@@ -95,12 +103,7 @@ class MapController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /** @var Map $map */
-            $map = $form->getData();
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($map);
-            $em->flush();
+            $this->mapManager->persistMap($form->getData());
 
             return $this->redirectToRoute('map_index');
         }
@@ -119,27 +122,19 @@ class MapController extends Controller
      */
     public function tileByTileAction(Request $request)
     {
-        $mapManager = $this->get('app.map_manager');
-
         $id = $request->get('id');
         $x = $request->get('x');
         $y = $request->get('y');
 
         /** @var Tile $tile */
-        foreach ($mapManager->getTiles() as $tile) {
+        foreach ($this->mapManager->getTiles() as $tile) {
             if ($tile->getId() == $request->get('tileId')) {
                 break;
             }
         }
 
-        /** @var MapRepository $repo */
-        $mapRepo = $mapManager->mapRepository();
-
-        $map = $mapRepo->findOneById($id);
-
-        if (!$map instanceof Map) {
-            throw $this->createNotFoundException('Map not found!');
-        }
+        /** @var Map $map */
+        $map = $this->mapManager->getMapById($id);
 
         /** @var MapTileRepository $repo */
         $mapTileRepo = $this
@@ -155,22 +150,6 @@ class MapController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
-    }
-
-
-// --------------------------- PRIVATE METHODS ---------------------------
-
-
-    /**
-     * Check if $map instanceof Map or throw an exception
-     *
-     * @param object $map
-     */
-    private function checkInstanceOfMap($map)
-    {
-        if (!$map instanceof Map) {
-            throw $this->createNotFoundException('Map not found!');
-        }
     }
 
 }
