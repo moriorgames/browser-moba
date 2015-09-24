@@ -5,8 +5,7 @@ namespace MoriorGames\UserBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class UserBundle
- * @package UserBundle
+ * Class UserBundle.
  */
 class UserBundle extends Bundle
 {
