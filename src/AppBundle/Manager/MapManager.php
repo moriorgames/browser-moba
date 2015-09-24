@@ -11,8 +11,7 @@ use AppBundle\Repository\MapRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class MapManager
- * @package AppBundle\Manager
+ * Class MapManager.
  */
 class MapManager
 {
@@ -46,7 +45,7 @@ class MapManager
     /**
      * Get Map by id or throw exception.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return Map|NotFoundHttpException
      */
@@ -80,7 +79,7 @@ class MapManager
             $this->em->persist($map);
             $this->em->flush();
         } catch (ORMException $e) {
-            echo 'Fail when persist: ' . $e->getMessage() . "\n";
+            echo 'Fail when persist: '.$e->getMessage()."\n";
         }
     }
 
@@ -93,10 +92,8 @@ class MapManager
     {
         $tiles = [];
 
-        for ($top = 1; $top <= $map->getHeight(); $top++) {
-
-            for ($left = 0; $left <= $map->getWidth(); $left++) {
-
+        for ($top = 1; $top <= $map->getHeight(); ++$top) {
+            for ($left = 0; $left <= $map->getWidth(); ++$left) {
                 if ($top % 2 === 0 && $left % 2 === 0) {
                     continue;
                 }
@@ -107,16 +104,14 @@ class MapManager
                 $mapTile = $this->getMapTile($left, $top, $map);
 
                 $tiles[] = [
-                    'id'    => MapManager::generateIdTile($mapTile),
+                    'id' => self::generateIdTile($mapTile),
                     'class' => $mapTile->getTile()->getClass(),
-                    'top'   => self::INCREMENTAL_TOP * $top,
-                    'left'  => self::INCREMENTAL_LEFT * $left + 20,
-                    'y'     => $top,
-                    'x'     => $left,
+                    'top' => self::INCREMENTAL_TOP * $top,
+                    'left' => self::INCREMENTAL_LEFT * $left + 20,
+                    'y' => $top,
+                    'x' => $left,
                 ];
-
             }
-
         }
 
         return $tiles;
@@ -135,8 +130,8 @@ class MapManager
             ->getRepository('AppBundle:MapTile')
             ->findOneBy(
                 [
-                    'x'   => $x,
-                    'y'   => $y,
+                    'x' => $x,
+                    'y' => $y,
                     'map' => $map,
                 ]
             );
@@ -157,7 +152,7 @@ class MapManager
     }
 
     /**
-     * Standard method to generate id for tiles
+     * Standard method to generate id for tiles.
      *
      * @param MapTile $mapTile
      *
@@ -165,6 +160,6 @@ class MapManager
      */
     public static function generateIdTile(MapTile $mapTile)
     {
-        return 'x_' . $mapTile->getX() . '_y_' . $mapTile->getY();
+        return 'x_'.$mapTile->getX().'_y_'.$mapTile->getY();
     }
 }

@@ -14,7 +14,7 @@ use AppBundle\Entity\User;
 /**
  * A command console that creates users and stores them in the database.
  * To use this command, open a terminal window, enter into your project
- * directory and execute the following:
+ * directory and execute the following:.
  *
  *     $ php app/console app:add-user
  *
@@ -192,7 +192,7 @@ class AddUserCommand extends ContainerAwareCommand
             $finishTime = microtime(true);
             $elapsedTime = $finishTime - $startTime;
 
-            $output->writeln(sprintf('[INFO] New user database id: %d / Elapsed time: %.2f ms', $user->getId(), $elapsedTime*1000));
+            $output->writeln(sprintf('[INFO] New user database id: %d / Elapsed time: %.2f ms', $user->getId(), $elapsedTime * 1000));
         }
     }
 

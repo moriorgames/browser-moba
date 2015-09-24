@@ -2,14 +2,11 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Map;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class MapRepository
- * @package AppBundle\Repository
+ * Class MapRepository.
  */
 class MapRepository extends EntityRepository
 {
-
 }

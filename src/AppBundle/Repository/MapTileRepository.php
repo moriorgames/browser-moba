@@ -8,16 +8,16 @@ use AppBundle\Entity\MapTile;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class MapRepository
- * @package AppBundle\Repository
+ * Class MapRepository.
  */
 class MapTileRepository extends EntityRepository
 {
     /**
-     * @param integer $x
-     * @param integer $y
-     * @param Map $map
+     * @param int  $x
+     * @param int  $y
+     * @param Map  $map
      * @param Tile $tile
+     *
      * @return bool
      */
     public function insertPosition($x, $y, Map $map, Tile $tile)

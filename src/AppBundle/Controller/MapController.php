@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -24,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class MapController extends Controller
 {
-
     /**
      * @var MapManager
      */
@@ -57,7 +55,7 @@ class MapController extends Controller
      * @Route("/edit/{id}", name="map_edit")
      * @Template("map/edit.html.twig")
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return Response
      */
@@ -67,9 +65,9 @@ class MapController extends Controller
         $map = $this->mapManager->getMapById($id);
 
         return [
-            'map'      => $map,
+            'map' => $map,
             'mapTiles' => $this->mapManager->createView($map),
-            'tiles'    => $this->mapManager->getTiles(),
+            'tiles' => $this->mapManager->getTiles(),
         ];
     }
 
@@ -102,7 +100,6 @@ class MapController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->mapManager->persistMap($form->getData());
 
             return $this->redirectToRoute('map_index');
@@ -136,7 +133,7 @@ class MapController extends Controller
         /** @var Map $map */
         $map = $this->mapManager->getMapById($id);
 
-        /** @var MapTileRepository $repo */
+        /** @var MapTileRepository $mapTileRepo */
         $mapTileRepo = $this
             ->getDoctrine()
             ->getManager()
@@ -151,5 +148,4 @@ class MapController extends Controller
 
         return $response;
     }
-
 }

@@ -7,8 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class MapType
- * @package AppBundle\Form
+ * Class MapType.
  */
 class MapType extends AbstractType
 {
@@ -43,5 +42,4 @@ class MapType extends AbstractType
     {
         return 'app_bundle_map_type';
     }
-
 }

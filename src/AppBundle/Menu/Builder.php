@@ -6,7 +6,7 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
- * Class Builder
+ * Class Builder.
  */
 class Builder extends ContainerAware
 {
