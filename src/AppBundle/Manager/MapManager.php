@@ -8,12 +8,13 @@ use AppBundle\Entity\MapTile;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Repository\MapRepository;
+use AppBundle\Manager\Interfaces\ManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class MapManager.
  */
-class MapManager
+class MapManager implements ManagerInterface
 {
     const TILE = 112;
     const INCREMENTAL_TOP = 28;
@@ -49,10 +50,10 @@ class MapManager
      *
      * @return Map|NotFoundHttpException
      */
-    public function getMapById($id)
+    public function getById($id)
     {
         /** @var Map $map */
-        $map = $this->getMapRepository()
+        $map = $this->getRepository()
             ->findOneBy(['id' => $id]);
 
         if (!$map instanceof Map) {
@@ -65,7 +66,7 @@ class MapManager
     /**
      * @return MapRepository
      */
-    public function getMapRepository()
+    public function getRepository()
     {
         return $this->em->getRepository('AppBundle:Map');
     }

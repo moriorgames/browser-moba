@@ -48,7 +48,7 @@ class MapController extends Controller
      */
     public function indexAction()
     {
-        return ['maps' => $this->manager->getMapRepository()->findAll()];
+        return ['maps' => $this->manager->getRepository()->findAll()];
     }
 
     /**
@@ -62,7 +62,7 @@ class MapController extends Controller
     public function editAction($id)
     {
         /** @var Map $map */
-        $map = $this->manager->getMapById($id);
+        $map = $this->manager->getById($id);
 
         return [
             'map' => $map,
