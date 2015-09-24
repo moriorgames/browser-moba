@@ -26,7 +26,7 @@ class MapController extends Controller
     /**
      * @var MapManager
      */
-    private $mapManager;
+    private $manager;
 
     /**
      * Override the set container to add some controller logic.
@@ -37,7 +37,7 @@ class MapController extends Controller
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-        $this->mapManager = $this->get('app.map_manager');
+        $this->manager = $this->get('app.map_manager');
     }
 
     /**
@@ -48,7 +48,7 @@ class MapController extends Controller
      */
     public function indexAction()
     {
-        return ['maps' => $this->mapManager->getMapRepository()->findAll()];
+        return ['maps' => $this->manager->getMapRepository()->findAll()];
     }
 
     /**
@@ -62,12 +62,12 @@ class MapController extends Controller
     public function editAction($id)
     {
         /** @var Map $map */
-        $map = $this->mapManager->getMapById($id);
+        $map = $this->manager->getMapById($id);
 
         return [
             'map' => $map,
-            'mapTiles' => $this->mapManager->createView($map),
-            'tiles' => $this->mapManager->getTiles(),
+            'mapTiles' => $this->manager->createView($map),
+            'tiles' => $this->manager->getTiles(),
         ];
     }
 
@@ -100,7 +100,7 @@ class MapController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->mapManager->persistMap($form->getData());
+            $this->manager->persistMap($form->getData());
 
             return $this->redirectToRoute('map_index');
         }
@@ -124,14 +124,14 @@ class MapController extends Controller
         $y = $request->get('y');
 
         /** @var Tile $tile */
-        foreach ($this->mapManager->getTiles() as $tile) {
+        foreach ($this->manager->getTiles() as $tile) {
             if ($tile->getId() == $request->get('tileId')) {
                 break;
             }
         }
 
         /** @var Map $map */
-        $map = $this->mapManager->getMapById($id);
+        $map = $this->manager->getMapById($id);
 
         /** @var MapTileRepository $mapTileRepo */
         $mapTileRepo = $this
