@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class ArchetypeTrait
- * @package AppBundle\Entity\Traits
+ * Class ArchetypeTrait.
  */
 trait ArchetypeTrait
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="physical_damage", type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -20,7 +19,7 @@ trait ArchetypeTrait
     private $physicalDamage;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="magic_damage", type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -28,7 +27,7 @@ trait ArchetypeTrait
     private $magicDamage;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="hit_points", type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -36,7 +35,7 @@ trait ArchetypeTrait
     private $hitPoints;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="magic_points", type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -44,7 +43,7 @@ trait ArchetypeTrait
     private $magicPoints;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -52,7 +51,7 @@ trait ArchetypeTrait
     private $armor;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="magic_resistance", type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -178,5 +177,4 @@ trait ArchetypeTrait
 
         return $this;
     }
-
 }

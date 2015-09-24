@@ -6,15 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class Tile
- * @package AppBundle\Entity
+ * Class Tile.
  *
  * @ORM\Entity
  * @ORM\Table(name="m_tile")
  */
 class Tile
 {
-
     const TYPE_BLUE_HOME = 0;
     const TYPE_BLUE_CASTLE = 1;
     const TYPE_BLUE_TOWER = 2;
@@ -26,7 +24,7 @@ class Tile
     const TYPE_WOODS = 8;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -49,7 +47,7 @@ class Tile
     private $class;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="tile_type", type="integer")
      */
@@ -66,9 +64,9 @@ class Tile
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -76,7 +74,7 @@ class Tile
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -86,9 +84,10 @@ class Tile
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -99,7 +98,7 @@ class Tile
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -109,9 +108,10 @@ class Tile
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $class
+     *
      * @return $this
      */
     public function setClass($class)
@@ -122,7 +122,7 @@ class Tile
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTileType()
     {
@@ -130,7 +130,8 @@ class Tile
     }
 
     /**
-     * @param integer $tileType
+     * @param int $tileType
+     *
      * @return $this
      */
     public function setTileType($tileType)
@@ -149,9 +150,10 @@ class Tile
     }
 
     /**
-     * Add tiles to map
+     * Add tiles to map.
      *
      * @param MapTile $mapTiles
+     *
      * @return $this
      */
     public function addMapTiles(MapTile $mapTiles)
@@ -162,7 +164,7 @@ class Tile
     }
 
     /**
-     * Remove postHasMedias
+     * Remove postHasMedias.
      *
      * @param MapTile $mapTiles
      */
@@ -170,5 +172,4 @@ class Tile
     {
         $this->mapTiles->removeElement($mapTiles);
     }
-
 }

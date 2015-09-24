@@ -6,8 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class NameSlugTrait
- * @package AppBundle\Entity\Traits
+ * Class NameSlugTrait.
  */
 trait NameSlugTrait
 {
@@ -27,7 +26,7 @@ trait NameSlugTrait
     private $slug;
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -37,9 +36,10 @@ trait NameSlugTrait
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -50,7 +50,7 @@ trait NameSlugTrait
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -60,9 +60,10 @@ trait NameSlugTrait
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return $this
      */
     public function setSlug($slug)
@@ -71,5 +72,4 @@ trait NameSlugTrait
 
         return $this;
     }
-
 }

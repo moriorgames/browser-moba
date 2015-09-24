@@ -5,8 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class MapTile
- * @package AppBundle\Entity
+ * Class MapTile.
  *
  * @ORM\Table(name="m_map_tile")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MapTileRepository")
@@ -14,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MapTile
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -39,14 +38,14 @@ class MapTile
     private $tile;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", options={"default"=0})
      */
     private $x;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", options={"default"=0})
      */
@@ -70,6 +69,7 @@ class MapTile
 
     /**
      * @param Map $map
+     *
      * @return $this
      */
     public function setMap(Map $map)
@@ -89,6 +89,7 @@ class MapTile
 
     /**
      * @param Tile $tile
+     *
      * @return $this
      */
     public function setTile(Tile $tile)
@@ -108,6 +109,7 @@ class MapTile
 
     /**
      * @param int $x
+     *
      * @return $this
      */
     public function setX($x)
@@ -127,6 +129,7 @@ class MapTile
 
     /**
      * @param int $y
+     *
      * @return $this
      */
     public function setY($y)
@@ -135,5 +138,4 @@ class MapTile
 
         return $this;
     }
-
 }

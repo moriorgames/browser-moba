@@ -7,8 +7,7 @@ use AppBundle\Entity\Traits\NameSlugTrait;
 use AppBundle\Entity\Traits\ArchetypeTrait;
 
 /**
- * Class Archetype
- * @package AppBundle\Entity
+ * Class Archetype.
  *
  * @ORM\Entity
  * @ORM\Table(name="c_archetype")
@@ -20,7 +19,7 @@ class Archetype
     use ArchetypeTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,24 +28,12 @@ class Archetype
     private $id;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-

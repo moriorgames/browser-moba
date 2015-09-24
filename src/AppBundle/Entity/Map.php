@@ -8,8 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Map
- * @package AppBundle\Entity
+ * Class Map.
  *
  * @ORM\Entity
  * @ORM\Table(name="m_map")
@@ -20,7 +19,7 @@ class Map
     use NameSlugTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,7 +28,7 @@ class Map
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -37,7 +36,7 @@ class Map
     private $height;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -45,7 +44,7 @@ class Map
     private $width;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -62,9 +61,9 @@ class Map
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -72,7 +71,7 @@ class Map
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getHeight()
     {
@@ -80,7 +79,8 @@ class Map
     }
 
     /**
-     * @param integer $height
+     * @param int $height
+     *
      * @return $this
      */
     public function setHeight($height)
@@ -91,7 +91,7 @@ class Map
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getWidth()
     {
@@ -99,7 +99,8 @@ class Map
     }
 
     /**
-     * @param integer $width
+     * @param int $width
+     *
      * @return $this
      */
     public function setWidth($width)
@@ -110,7 +111,7 @@ class Map
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -118,7 +119,8 @@ class Map
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
+     *
      * @return $this
      */
     public function setEnabled($enabled)
@@ -137,9 +139,10 @@ class Map
     }
 
     /**
-     * Add tiles to map
+     * Add tiles to map.
      *
      * @param MapTile $mapTiles
+     *
      * @return $this
      */
     public function addMapTiles(MapTile $mapTiles)
@@ -150,7 +153,7 @@ class Map
     }
 
     /**
-     * Remove postHasMedias
+     * Remove postHasMedias.
      *
      * @param MapTile $mapTiles
      */
@@ -158,5 +161,4 @@ class Map
     {
         $this->mapTiles->removeElement($mapTiles);
     }
-
 }

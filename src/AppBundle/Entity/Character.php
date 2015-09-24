@@ -8,8 +8,7 @@ use AppBundle\Entity\Traits\ArchetypeTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Character
- * @package AppBundle\Entity
+ * Class Character.
  *
  * @ORM\Entity
  * @ORM\Table(name="c_character")
@@ -21,7 +20,7 @@ class Character
     use ArchetypeTrait;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -30,7 +29,7 @@ class Character
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
@@ -38,9 +37,9 @@ class Character
     private $experience;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -66,5 +65,4 @@ class Character
 
         return $this;
     }
-
 }
