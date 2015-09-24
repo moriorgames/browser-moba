@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Class Tile.
  *
  * @ORM\Entity
- * @ORM\Table(name="m_tile")
+ * @ORM\Table(name="map_tile")
  */
 class Tile
 {

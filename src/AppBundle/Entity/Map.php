@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Map.
  *
  * @ORM\Entity
- * @ORM\Table(name="m_map")
+ * @ORM\Table(name="map_map")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MapRepository")
  */
 class Map

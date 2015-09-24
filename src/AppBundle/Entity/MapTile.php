@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class MapTile.
  *
- * @ORM\Table(name="m_map_tile")
+ * @ORM\Table(name="map_map_tile")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MapTileRepository")
  */
 class MapTile

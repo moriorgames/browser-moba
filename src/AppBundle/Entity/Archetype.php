@@ -10,7 +10,7 @@ use AppBundle\Entity\Traits\ArchetypeTrait;
  * Class Archetype.
  *
  * @ORM\Entity
- * @ORM\Table(name="c_archetype")
+ * @ORM\Table(name="char_archetype")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArchetypeRepository")
  */
 class Archetype

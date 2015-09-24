@@ -7,6 +7,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Image.
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="media_image")
  */
 class Image
 {
@@ -28,6 +31,9 @@ class Image
      */
     public $path;
 
+    /**
+     * @return null|string
+     */
     public function getAbsolutePath()
     {
         return null === $this->path
@@ -35,6 +41,9 @@ class Image
             : $this->getUploadRootDir().'/'.$this->path;
     }
 
+    /**
+     * @return null|string
+     */
     public function getWebPath()
     {
         return null === $this->path
@@ -42,6 +51,9 @@ class Image
             : $this->getUploadDir().'/'.$this->path;
     }
 
+    /**
+     * @return string
+     */
     protected function getUploadRootDir()
     {
         // the absolute directory path where uploaded
@@ -49,6 +61,9 @@ class Image
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
+    /**
+     * @return string
+     */
     protected function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw up

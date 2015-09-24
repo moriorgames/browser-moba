@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Character.
  *
  * @ORM\Entity
- * @ORM\Table(name="c_character")
+ * @ORM\Table(name="char_character")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CharacterRepository")
  */
 class Character
