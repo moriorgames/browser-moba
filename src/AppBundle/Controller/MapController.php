@@ -131,7 +131,7 @@ class MapController extends Controller
         }
 
         /** @var Map $map */
-        $map = $this->manager->getMapById($id);
+        $map = $this->manager->getById($id);
 
         /** @var MapTileRepository $mapTileRepo */
         $mapTileRepo = $this
