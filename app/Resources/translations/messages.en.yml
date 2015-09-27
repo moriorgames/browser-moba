@@ -39,7 +39,8 @@ label:
 
 menu:
     homepage: Homepage
-    map: Map index
+    map: Maps
+    archetype: Archetypes
     admin: Backend
     logout: Logout
 
@@ -59,14 +60,13 @@ map:
     title_index: Map index
     title_create: Map create
     title_edit: Map edit
-    sub_title_create: Crea un nuevo mapa
+    sub_title_create: Create a new mapa
     table:
         id: Id
         name: Map name
         height: Map Height
         width: Map Width
         action: Action
-        edit_link: Edit
     form:
         name:       Name
         slug:       Slug
@@ -75,3 +75,15 @@ map:
         enabled:    Is enabled
         submit_create: Create map
         return_to_list: Return to list
+
+archetype:
+    title_index: Archetype index
+    title_create: Archetype create
+    title_edit: Archetype edit
+    sub_title_create: Create a new archetype
+    table:
+        id: Id
+        name: archetype name
+        height: Map Height
+        width: Map Width
+        action: Action
