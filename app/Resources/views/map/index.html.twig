@@ -26,9 +26,20 @@
                         <td>{{ map.height }}</td>
                         <td>{{ map.width }}</td>
                         <td>
-                            <a href="{{ path('map_edit', {id : map.id} ) }}">
-                                {{ 'action.edit'|trans }}
-                            </a>
+                            <div class="btn-group">
+                                <a class="btn btn-success"
+                                   href="{{ path('map_edit', {id : map.id} ) }}">
+                                    {{ 'action.edit'|trans }}
+                                </a>
+                                <a class="btn btn-default"
+                                   href="{{ path('map_construct', {id : map.id} ) }}">
+                                    {{ 'map.table.action_construct'|trans }}
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('map_edit', {id : map.id} ) }}">
+                                    {{ 'action.delete'|trans }}
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}

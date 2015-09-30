@@ -53,7 +53,7 @@ class MapController extends Controller
 
     /**
      * @Route("/edit/{id}", name="map_edit")
-     * @Template("map/edit.html.twig")
+     * @Template("map/create.html.twig")
      *
      * @param int $id
      *
@@ -65,9 +65,7 @@ class MapController extends Controller
         $map = $this->manager->getById($id);
 
         return [
-            'map' => $map,
-            'mapTiles' => $this->manager->createView($map),
-            'tiles' => $this->manager->getTiles(),
+            'form' => $this->createForm(new MapType(), $map)->createView(),
         ];
     }
 
@@ -107,6 +105,26 @@ class MapController extends Controller
 
         return [
             'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/construct/{id}", name="map_construct")
+     * @Template("map/construct.html.twig")
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function constructAction($id)
+    {
+        /** @var Map $map */
+        $map = $this->manager->getById($id);
+
+        return [
+            'map' => $map,
+            'mapTiles' => $this->manager->createView($map),
+            'tiles' => $this->manager->getTiles(),
         ];
     }
 

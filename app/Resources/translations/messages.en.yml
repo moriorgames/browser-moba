@@ -13,16 +13,13 @@ action:
     show: Show
     show_code: Show code
     edit: Edit
-    edit_post: Edit post
+    delete: Delete
     save: Save changes
-    delete_post: Delete post
-    create_post: Create a new post
-    back_to_list: Back to the post list
-    publish_comment: Publish comment
+    create: Create
+    back_to_list: Back to list
     sign_in: Sign in
     browse_app: Browse application
     browse_admin: Browse backend
-    edit_contents: Edit contents
 
 label:
     create_post: Create post
@@ -67,6 +64,7 @@ map:
         height: Map Height
         width: Map Width
         action: Action
+        action_construct: Construct map
     form:
         name:       Name
         slug:       Slug
@@ -74,7 +72,6 @@ map:
         width:      Map Width
         enabled:    Is enabled
         submit_create: Create map
-        return_to_list: Return to list
         new_map: + New map
 
 archetype:

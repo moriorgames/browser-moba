@@ -9,4 +9,7 @@ No documentation yet. Coming soon
 TODO LIST
 ---------
 
-I need to change a controller from the MapController. The CRUD of the map entity has create, and read but I need an update and a Delete actions.
+- MapController: The edit action is creating a new entity, I need to modify the current entity.
+- The :map/edit.html.twig needs to change the literal to "edit map" instead of "new map"
+- Create the delete action over the list "map_index" with an alert.
+- ArchetypeController: File management and the creation of the CRUD
