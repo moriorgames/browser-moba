@@ -3,6 +3,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Archetype;
+use AppBundle\Form\ArchetypeType;
 use AppBundle\Manager\ArchetypeManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,7 +52,7 @@ class ArchetypeController extends Controller
 
     /**
      * @Route("/edit/{id}", name="archetype_edit")
-     * @Template("map/edit.html.twig")
+     * @Template("archetype/edit.html.twig")
      *
      * @param int $id
      *
@@ -58,19 +60,17 @@ class ArchetypeController extends Controller
      */
     public function editAction($id)
     {
-        /** @var Map $map */
-        $map = $this->mapManager->getMapById($id);
+        /** @var Archetype $archetype */
+        $archetype = $this->manager->getById($id);
 
         return [
-            'map' => $map,
-            'mapTiles' => $this->manager->createView($map),
-            'tiles' => $this->manager->getTiles(),
+            'archetype' => $archetype,
         ];
     }
 
     /**
      * @Route("/create", name="archetype_create")
-     * @Template("map/create.html.twig")
+     * @Template("archetype/create.html.twig")
      * @Method("GET")
      *
      * @return Response
@@ -78,13 +78,13 @@ class ArchetypeController extends Controller
     public function createAction()
     {
         return [
-            'form' => $this->createForm(new MapType())->createView(),
+            'form' => $this->createForm(new ArchetypeType())->createView(),
         ];
     }
 
     /**
      * @Route("/create", name="archetype_update")
-     * @Template("map/create.html.twig")
+     * @Template("archetype/create.html.twig")
      * @Method("POST")
      *
      * @param Request $request
@@ -93,13 +93,13 @@ class ArchetypeController extends Controller
      */
     public function updateAction(Request $request)
     {
-        $form = $this->createForm(new MapType());
+        $form = $this->createForm(new ArchetypeType());
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->manager->persistMap($form->getData());
+            //$this->manager->persistMap($form->getData());
 
-            return $this->redirectToRoute('map_index');
+            return $this->redirectToRoute('archetype_index');
         }
 
         return [

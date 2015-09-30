@@ -75,6 +75,7 @@ map:
         enabled:    Is enabled
         submit_create: Create map
         return_to_list: Return to list
+        new_map: + New map
 
 archetype:
     title_index: Archetype index
@@ -83,7 +84,7 @@ archetype:
     sub_title_create: Create a new archetype
     table:
         id: Id
-        name: archetype name
-        height: Map Height
-        width: Map Width
-        action: Action
+        name: Archetype name
+        
+    form:
+        new_archetype: + New archetype
