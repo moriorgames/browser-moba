@@ -85,6 +85,6 @@ archetype:
     table:
         id: Id
         name: Archetype name
-        
+
     form:
         new_archetype: + New archetype
