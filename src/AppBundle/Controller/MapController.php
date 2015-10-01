@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\BrowserKit\Response as Troll;
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -37,7 +36,6 @@ class MapController extends Controller
      */
     public function setContainer(ContainerInterface $container = null)
     {
-        $new = new FooClass();
         $this->container = $container;
         $this->manager = $this->get('app.map_manager');
     }
@@ -65,7 +63,6 @@ class MapController extends Controller
     {
         /** @var Map $map */
         $map = $this->manager->getById($id);
-        dump($map);
 
         return [
             'form' => $this->createForm(new MapType(), $map)->createView(),
