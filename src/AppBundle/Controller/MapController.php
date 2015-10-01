@@ -37,6 +37,7 @@ class MapController extends Controller
      */
     public function setContainer(ContainerInterface $container = null)
     {
+        $new = new FooClass();
         $this->container = $container;
         $this->manager = $this->get('app.map_manager');
     }
