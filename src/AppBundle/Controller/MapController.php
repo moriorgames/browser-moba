@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\BrowserKit\Response as Troll;
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -63,6 +64,7 @@ class MapController extends Controller
     {
         /** @var Map $map */
         $map = $this->manager->getById($id);
+        dump($map);
 
         return [
             'form' => $this->createForm(new MapType(), $map)->createView(),
