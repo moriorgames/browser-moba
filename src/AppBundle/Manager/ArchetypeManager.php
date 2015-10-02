@@ -2,7 +2,6 @@
 
 namespace AppBundle\Manager;
 
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Archetype;
 use AppBundle\Repository\ArchetypeRepository;

@@ -10,36 +10,18 @@ use AppBundle\Repository\MapTileRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Controller used to manage blog contents in the public part of the site.
+ * Controller used to manage maps in the public part of the site.
  *
  * @Route("/map")
  */
 class MapController extends Controller
 {
-    /**
-     * @var MapManager
-     */
-    private $manager;
-
-    /**
-     * Override the set container to add some controller logic.
-     * This function is called at the initialize of the controller.
-     *
-     * @param ContainerInterface|null $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-        $this->manager = $this->get('app.map_manager');
-    }
-
     /**
      * @Route("/", name="map_index")
      * @Template("map/index.html.twig")
@@ -48,7 +30,10 @@ class MapController extends Controller
      */
     public function indexAction()
     {
-        return ['maps' => $this->manager->getRepository()->findAll()];
+        /** @var MapManager $manager */
+        $manager = $this->get('app.map_manager');
+
+        return ['maps' => $manager->getRepository()->findAll()];
     }
 
     /**
@@ -61,8 +46,10 @@ class MapController extends Controller
      */
     public function editAction($id)
     {
+        /** @var MapManager $manager */
+        $manager = $this->get('app.map_manager');
         /** @var Map $map */
-        $map = $this->manager->getById($id);
+        $map = $manager->getById($id);
 
         return [
             'form' => $this->createForm(new MapType(), $map)->createView(),
@@ -94,11 +81,14 @@ class MapController extends Controller
      */
     public function updateAction(Request $request)
     {
+        /** @var MapManager $manager */
+        $manager = $this->get('app.map_manager');
+
         $form = $this->createForm(new MapType());
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->manager->persistMap($form->getData());
+            $manager->persistMap($form->getData());
 
             return $this->redirectToRoute('map_index');
         }
@@ -118,13 +108,15 @@ class MapController extends Controller
      */
     public function constructAction($id)
     {
+        /** @var MapManager $manager */
+        $manager = $this->get('app.map_manager');
         /** @var Map $map */
-        $map = $this->manager->getById($id);
+        $map = $manager->getById($id);
 
         return [
             'map' => $map,
-            'mapTiles' => $this->manager->createView($map),
-            'tiles' => $this->manager->getTiles(),
+            'mapTiles' => $manager->createView($map),
+            'tiles' => $manager->getTiles(),
         ];
     }
 
@@ -137,19 +129,22 @@ class MapController extends Controller
      */
     public function tileByTileAction(Request $request)
     {
+        /** @var MapManager $manager */
+        $manager = $this->get('app.map_manager');
+
         $id = $request->get('id');
         $x = $request->get('x');
         $y = $request->get('y');
 
         /** @var Tile $tile */
-        foreach ($this->manager->getTiles() as $tile) {
+        foreach ($manager->getTiles() as $tile) {
             if ($tile->getId() == $request->get('tileId')) {
                 break;
             }
         }
 
         /** @var Map $map */
-        $map = $this->manager->getById($id);
+        $map = $manager->getById($id);
 
         /** @var MapTileRepository $mapTileRepo */
         $mapTileRepo = $this
