@@ -32,7 +32,6 @@ web/bundles/
 web/uploads/
 web/.htaccess
 web/app_dev.php
-web/robots.txt
 
 # PHPUnit and some xml files
 phpunit.xml
