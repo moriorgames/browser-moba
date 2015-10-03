@@ -15,7 +15,7 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
 
         $menu->addChild('menu.homepage', ['route' => 'homepage']);
-        $menu->addChild('menu.map', ['route' => 'map_index']);
+        $menu->addChild('menu.map', ['route' => 'map']);
         $menu->addChild('menu.archetype', ['route' => 'archetype_index']);
 
         return $menu;

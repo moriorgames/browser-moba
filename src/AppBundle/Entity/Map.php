@@ -51,7 +51,7 @@ class Map
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MapTile", mappedBy="map", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MapTile", mappedBy="map", cascade={"persist", "remove"})
      */
     protected $mapTiles;
 
@@ -68,6 +68,20 @@ class Map
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get id.
+     *
+     * @param int $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
