@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Map;
 use AppBundle\Entity\Tile;
 use AppBundle\Form\MapType;
+use Symfony\Component\Form\Form;
 use AppBundle\Manager\MapManager;
 use AppBundle\Repository\MapTileRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class MapController extends Controller
 {
-
     /**
      * Lists all Map entities.
      *
@@ -37,6 +37,20 @@ class MapController extends Controller
         $manager = $this->get('app.map_manager');
 
         return ['maps' => $manager->getRepository()->findAll()];
+    }
+
+    /**
+     * Finds and displays a Map entity.
+     *
+     * @Route("/{id}", name="map_show")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showAction($id)
+    {
+        return [
+            'entity' => $this->get('app.map_manager')->getById($id),
+        ];
     }
 
     /**
@@ -69,25 +83,6 @@ class MapController extends Controller
     }
 
     /**
-     * Creates a form to create a Map entity.
-     *
-     * @param Map $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Map $entity)
-    {
-        $form = $this->createForm(new MapType(), $entity, [
-            'action' => $this->generateUrl('map_create'),
-            'method' => 'POST',
-        ]);
-
-        $form->add('submit', 'submit', ['label' => 'Create']);
-
-        return $form;
-    }
-
-    /**
      * Displays a form to create a new Map entity.
      *
      * @Route("/new", name="map_new")
@@ -106,36 +101,15 @@ class MapController extends Controller
     }
 
     /**
-     * Finds and displays a Map entity.
-     *
-     * @Route("/{id}", name="map_show")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Map')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Map entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return [
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ];
-    }
-
-    /**
      * Displays a form to edit an existing Map entity.
      *
      * @Route("/{id}/edit", name="map_edit")
      * @Method("GET")
      * @Template()
+     *
+     * @param int $id
+     *
+     * @return array
      */
     public function editAction($id)
     {
@@ -148,32 +122,11 @@ class MapController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return [
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'entity' => $entity,
+            'form'   => $editForm->createView(),
         ];
-    }
-
-    /**
-     * Creates a form to edit a Map entity.
-     *
-     * @param Map $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createEditForm(Map $entity)
-    {
-        $form = $this->createForm(new MapType(), $entity, [
-            'action' => $this->generateUrl('map_update', ['id' => $entity->getId()]),
-            'method' => 'PUT',
-        ]);
-
-        $form->add('submit', 'submit', ['label' => 'Update']);
-
-        return $form;
     }
 
     /**
@@ -185,20 +138,14 @@ class MapController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        /** @var Map $entity */
+        $entity = $this->get('app.map_manager')->getById($id);
 
-        $entity = $em->getRepository('AppBundle:Map')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Map entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirect($this->generateUrl('map_edit', ['id' => $id]));
         }
@@ -206,50 +153,28 @@ class MapController extends Controller
         return [
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ];
     }
 
     /**
      * Deletes a Map entity.
      *
-     * @Route("/{id}", name="map_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="map_delete")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        /** @var MapManager $manager */
+        $manager = $this->get('app.map_manager');
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Map')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $manager->getRepository()->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Map entity.');
-            }
-
+        if ($entity instanceof Map) {
             $em->remove($entity);
             $em->flush();
         }
 
         return $this->redirect($this->generateUrl('map'));
-    }
-
-    /**
-     * Creates a form to delete a Map entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('map_delete', ['id' => $id]))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', ['label' => 'Delete'])
-            ->getForm();
     }
 
     /**
@@ -270,9 +195,9 @@ class MapController extends Controller
         $map = $manager->getById($id);
 
         return [
-            'map' => $map,
+            'map'      => $map,
             'mapTiles' => $manager->createView($map),
-            'tiles' => $manager->getTiles(),
+            'tiles'    => $manager->getTiles(),
         ];
     }
 
@@ -316,5 +241,57 @@ class MapController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+// ---------------------------- PRIVATE METHODS ----------------------------
+
+    /**
+     * Creates a form to create a Map entity.
+     *
+     * @param Map $entity The entity
+     *
+     * @return Form The form
+     */
+    private function createCreateForm(Map $entity)
+    {
+        $form = $this->createForm(new MapType(), $entity, [
+            'action' => $this->generateUrl('map_create'),
+            'method' => 'POST',
+        ]);
+
+        return $this->addButtonsToForm($form);
+    }
+
+    /**
+     * Creates a form to edit a Map entity.
+     *
+     * @param Map $entity The entity
+     *
+     * @return Form The form
+     */
+    private function createEditForm(Map $entity)
+    {
+        $form = $this->createForm(new MapType(), $entity, [
+            'action' => $this->generateUrl('map_update', ['id' => $entity->getId()]),
+            'method' => 'PUT',
+        ]);
+
+        return $this->addButtonsToForm($form);
+    }
+
+    /**
+     * Adds buttons to the forms in CRUD admin
+     *
+     * @param Form $form
+     *
+     * @return Form
+     */
+    private function addButtonsToForm(Form $form)
+    {
+        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('button', 'button', ['label' => 'Back to list']);
+        $form->add('button', 'button', ['label' => 'Delete']);
+
+        return $form;
     }
 }

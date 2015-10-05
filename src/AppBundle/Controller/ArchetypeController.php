@@ -1,111 +1,248 @@
 <?php
 
-// http://symfony.com/doc/current/cookbook/doctrine/file_uploads.html
-
-
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Archetype;
 use AppBundle\Form\ArchetypeType;
-use AppBundle\Manager\ArchetypeManager;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class ArchetypeController.
+ * Archetype controller.
  *
  * @Route("/archetype")
  */
 class ArchetypeController extends Controller
 {
-    /**
-     * @var ArchetypeManager
-     */
-    private $manager;
 
     /**
-     * Override the set container to add some controller logic.
-     * This function is called at the initialize of the controller.
+     * Lists all Archetype entities.
      *
-     * @param ContainerInterface|null $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-        $this->manager = $this->get('app.archetype_manager');
-    }
-
-    /**
-     * @Route("/", name="archetype_index")
-     * @Template("archetype/index.html.twig")
-     *
-     * @return Response
+     * @Route("/", name="archetype")
+     * @Method("GET")
+     * @Template()
      */
     public function indexAction()
     {
-        return ['archetypes' => $this->manager->getRepository()->findAll()];
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AppBundle:Archetype')->findAll();
+
+        return array(
+            'entities' => $entities,
+        );
+    }
+    /**
+     * Creates a new Archetype entity.
+     *
+     * @Route("/", name="archetype_create")
+     * @Method("POST")
+     * @Template("AppBundle:Archetype:new.html.twig")
+     */
+    public function createAction(Request $request)
+    {
+        $entity = new Archetype();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('archetype_show', array('id' => $entity->getId())));
+        }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
     }
 
     /**
-     * @Route("/edit/{id}", name="archetype_edit")
-     * @Template("archetype/edit.html.twig")
+     * Creates a form to create a Archetype entity.
      *
-     * @param int $id
+     * @param Archetype $entity The entity
      *
-     * @return Response
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Archetype $entity)
+    {
+        $form = $this->createForm(new ArchetypeType(), $entity, array(
+            'action' => $this->generateUrl('archetype_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+
+    /**
+     * Displays a form to create a new Archetype entity.
+     *
+     * @Route("/new", name="archetype_new")
+     * @Method("GET")
+     * @Template()
+     */
+    public function newAction()
+    {
+        $entity = new Archetype();
+        $form   = $this->createCreateForm($entity);
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
+    }
+
+    /**
+     * Finds and displays a Archetype entity.
+     *
+     * @Route("/{id}", name="archetype_show")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AppBundle:Archetype')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Archetype entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing Archetype entity.
+     *
+     * @Route("/{id}/edit", name="archetype_edit")
+     * @Method("GET")
+     * @Template()
      */
     public function editAction($id)
     {
-        /** @var Archetype $archetype */
-        $archetype = $this->manager->getById($id);
+        $em = $this->getDoctrine()->getManager();
 
-        return [
-            'archetype' => $archetype,
-        ];
-    }
+        $entity = $em->getRepository('AppBundle:Archetype')->find($id);
 
-    /**
-     * @Route("/create", name="archetype_create")
-     * @Template("archetype/create.html.twig")
-     * @Method("GET")
-     *
-     * @return Response
-     */
-    public function createAction()
-    {
-        return [
-            'form' => $this->createForm(new ArchetypeType())->createView(),
-        ];
-    }
-
-    /**
-     * @Route("/create", name="archetype_update")
-     * @Template("archetype/create.html.twig")
-     * @Method("POST")
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function updateAction(Request $request)
-    {
-        $form = $this->createForm(new ArchetypeType());
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            //$this->manager->persistMap($form->getData());
-
-            return $this->redirectToRoute('archetype_index');
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Archetype entity.');
         }
 
-        return [
-            'form' => $form->createView(),
-        ];
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+    * Creates a form to edit a Archetype entity.
+    *
+    * @param Archetype $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditForm(Archetype $entity)
+    {
+        $form = $this->createForm(new ArchetypeType(), $entity, array(
+            'action' => $this->generateUrl('archetype_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
+        return $form;
+    }
+    /**
+     * Edits an existing Archetype entity.
+     *
+     * @Route("/{id}", name="archetype_update")
+     * @Method("PUT")
+     * @Template("AppBundle:Archetype:edit.html.twig")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AppBundle:Archetype')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Archetype entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('archetype_edit', array('id' => $id)));
+        }
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+    /**
+     * Deletes a Archetype entity.
+     *
+     * @Route("/{id}", name="archetype_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AppBundle:Archetype')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Archetype entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('archetype'));
+    }
+
+    /**
+     * Creates a form to delete a Archetype entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('archetype_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+        ;
     }
 }

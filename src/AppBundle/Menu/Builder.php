@@ -16,7 +16,7 @@ class Builder extends ContainerAware
 
         $menu->addChild('menu.homepage', ['route' => 'homepage']);
         $menu->addChild('menu.map', ['route' => 'map']);
-        $menu->addChild('menu.archetype', ['route' => 'archetype_index']);
+        $menu->addChild('menu.archetype', ['route' => 'archetype']);
 
         return $menu;
     }
