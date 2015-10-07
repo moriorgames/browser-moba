@@ -9,3 +9,14 @@ services:
         class: AppBundle\Manager\ArchetypeManager
         arguments:
             - @doctrine.orm.entity_manager
+
+
+# Admin Panel services declaration
+
+    app.archetype.admin:
+        class: AppBundle\Admin\Archetype
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: form.label_content, label: Archetype }
+        arguments: [null, AppBundle\Entity\Archetype, SonataAdminBundle:CRUD]
+        calls:
+            - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]
