@@ -7,7 +7,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
 
             // Symfony application bundles
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -24,16 +24,21 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
+            // Sonata Admin bundles
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+
             // My bundles
             new AppBundle\AppBundle(),
             new MoriorGames\UserBundle\UserBundle(),
-        );
+        ];
 
         // Some bundles are only used while developing the application or during
         // the unit and functional tests. Therefore, they are only registered
         // when the application runs in 'dev' or 'test' environments. This allows
         // to increase application performance in the production environment.
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
@@ -45,6 +50,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }

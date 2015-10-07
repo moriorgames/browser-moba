@@ -1,0 +1,86 @@
+sonata_admin:
+    security:
+        handler:              sonata.admin.security.handler.noop
+        information:
+            id:                   []
+        admin_permissions:
+
+            # Defaults:
+            - CREATE
+            - LIST
+            - DELETE
+            - UNDELETE
+            - EXPORT
+            - OPERATOR
+            - MASTER
+        object_permissions:
+            - VIEW
+            - EDIT
+            - DELETE
+            - UNDELETE
+            - OPERATOR
+            - MASTER
+            - OWNER
+        acl_user_manager:     ~
+    title:                Admin Panel
+    title_logo:           images/logo.png
+    options:
+        html5_validate:                         true
+        confirm_exit:                           true
+        use_select2:                            true
+        use_icheck:                             true
+        dropdown_number_groups_per_colums:      2
+        title_mode:           'single_text'  # 'both', 'single_text' or 'single_image'
+
+    templates:
+        user_block:           SonataAdminBundle:Core:user_block.html.twig
+        add_block:            SonataAdminBundle:Core:add_block.html.twig
+        layout:               Admin/standard_layout.html.twig
+        ajax:                 SonataAdminBundle::ajax_layout.html.twig
+        dashboard:            SonataAdminBundle:Core:dashboard.html.twig
+        search:               SonataAdminBundle:Core:search.html.twig
+        list:                 SonataAdminBundle:CRUD:list.html.twig
+        filter:               SonataAdminBundle:Form:filter_admin_fields.html.twig
+        show:                 SonataAdminBundle:CRUD:show.html.twig
+        show_compare:         SonataAdminBundle:CRUD:show_compare.html.twig
+        edit:                 SonataAdminBundle:CRUD:edit.html.twig
+        preview:              SonataAdminBundle:CRUD:preview.html.twig
+        history:              SonataAdminBundle:CRUD:history.html.twig
+        acl:                  SonataAdminBundle:CRUD:acl.html.twig
+        history_revision_timestamp:  SonataAdminBundle:CRUD:history_revision_timestamp.html.twig
+        action:               SonataAdminBundle:CRUD:action.html.twig
+        select:               SonataAdminBundle:CRUD:list__select.html.twig
+        list_block:           SonataAdminBundle:Block:block_admin_list.html.twig
+        search_result_block:  SonataAdminBundle:Block:block_search_result.html.twig
+        short_object_description: CmsMediaBundle:MediaAdmin:image_preview.html.twig
+        delete:               SonataAdminBundle:CRUD:delete.html.twig
+        batch:                SonataAdminBundle:CRUD:list__batch.html.twig
+        batch_confirmation:   SonataAdminBundle:CRUD:batch_confirmation.html.twig
+        inner_list_row:       SonataAdminBundle:CRUD:list_inner_row.html.twig
+        base_list_field:      SonataAdminBundle:CRUD:base_list_field.html.twig
+        pager_links:          SonataAdminBundle:Pager:links.html.twig
+        pager_results:        SonataAdminBundle:Pager:results.html.twig
+        tab_menu_template:    SonataAdminBundle:Core:tab_menu_template.html.twig
+
+    persist_filters:      false     # set to true to persist filter settings per admin module in the user's session
+
+    dashboard:
+        groups:
+
+            Users:
+                label: Usuarios
+                items:
+                    - cms_user.admin.user
+                roles: [ ROLE_ADMIN ]
+
+            Content:
+                label: Contenido
+                items:
+                    - cms_blog.admin.post
+                roles: [ ROLE_ADMIN ]
+
+            Classification:
+                label: Clasificación
+                items:
+                    - cms_classification.admin.category
+                roles: [ ROLE_ADMIN ]

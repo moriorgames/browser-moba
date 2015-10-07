@@ -11,6 +11,7 @@ title:
 
 action:
     show: Show
+    update: Update
     show_code: Show code
     edit: Edit
     delete: Delete

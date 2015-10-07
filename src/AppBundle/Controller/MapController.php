@@ -288,9 +288,9 @@ class MapController extends Controller
      */
     private function addButtonsToForm(Form $form)
     {
-        $form->add('submit', 'submit', ['label' => 'Update']);
-        $form->add('button', 'button', ['label' => 'Back to list']);
-        $form->add('button', 'button', ['label' => 'Delete']);
+        $form->add('submit', 'submit', ['label' => 'action.update']);
+        $form->add('back', 'button', ['label' => 'action.back_to_list']);
+        $form->add('delete', 'button', ['label' => 'action.delete']);
 
         return $form;
     }
