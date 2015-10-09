@@ -22,6 +22,7 @@
         "symfony/symfony"                           : "2.8.x-dev",
         "friendsofsymfony/user-bundle"              : "2.0.x-dev",
         "twig/extensions"                           : "~1.2",
+        "sonata-project/core-bundle"                : "~2.3",
         "sonata-project/admin-bundle"               : "^2.4@dev",
         "sonata-project/doctrine-orm-admin-bundle"  : "^2.4@dev"
     },
