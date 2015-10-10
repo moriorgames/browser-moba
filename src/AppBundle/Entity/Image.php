@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use ReflectionClass;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Traits\NameSlugTrait;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -51,7 +52,7 @@ class Image
     {
         return null === $this->path
             ? null
-            : $this->getUploadRootDir().'/'.$this->path;
+            : $this->getUploadRootDir() . '/' . $this->path;
     }
 
     /**
@@ -61,7 +62,7 @@ class Image
     {
         return null === $this->path
             ? null
-            : $this->getUploadDir().'/'.$this->path;
+            : $this->getUploadDir() . '/' . $this->path;
     }
 
     /**
@@ -69,9 +70,9 @@ class Image
      */
     protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        $reflection = new ReflectionClass(get_class($this));
+
+        return dirname($reflection->getFileName()) . '/../../../../web/' . $this->getUploadDir();
     }
 
     /**
