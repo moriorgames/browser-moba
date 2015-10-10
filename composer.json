@@ -1,5 +1,6 @@
 {
     "name": "moriorgames/browser-moba",
+    "license" : "proprietary",
     "type": "project",
     "description": "A browser moba game built on top of Symfony",
     "autoload": {
