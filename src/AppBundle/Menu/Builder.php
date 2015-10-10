@@ -18,6 +18,10 @@ class Builder extends ContainerAware
         $menu->addChild('menu.map', ['route' => 'map']);
         $menu->addChild('menu.archetype', ['route' => 'archetype']);
 
+        // Temporary
+        $menu->addChild('menu.login', ['route' => 'fos_user_security_login']);
+        $menu->addChild('admin.dashboard', ['route' => 'sonata_admin_dashboard']);
+
         return $menu;
     }
 }

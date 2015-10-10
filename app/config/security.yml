@@ -15,12 +15,13 @@ security:
             pattern:            ^/admin(.*)
             context:            user
             form_login:
-                provider:       fos_userbundle
-                csrf_provider:  security.csrf.token_manager
-                login_path:     fos_user_security_login
-                use_forward:    true
-                check_path:     fos_user_security_check
-                failure_path:   fos_user_security_login
+                provider:           fos_userbundle
+                csrf_provider:      security.csrf.token_manager
+                login_path:         fos_user_security_login
+                use_forward:        true
+                check_path:         fos_user_security_check
+                failure_path:       fos_user_security_login
+                success_handler:    user.login_success_handler
             logout:
                 path:           fos_user_security_logout
             anonymous:          true
@@ -31,6 +32,7 @@ security:
             form_login:
                 provider:       fos_userbundle
                 csrf_provider:  security.csrf.token_manager
+                success_handler:    user.login_success_handler
             logout:             true
             anonymous:          true
 
