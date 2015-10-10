@@ -52,7 +52,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         );
 
         // If the user is an admin redirect to dashboard
-        if ($user->hasRole('ROLE_SUPER_ADMIN') or $user->hasRole('ROLE_ADMIN')) {
+        if ($user->hasRole('ROLE_SUPER_ADMIN') || $user->hasRole('ROLE_ADMIN')) {
             $response = new RedirectResponse(
                 $this->router->generate('sonata_admin_dashboard')
             );
