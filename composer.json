@@ -5,8 +5,15 @@
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
+    "prefer-stable" : true,
+    "minimum-stability" : "dev",
     "require": {
         "php"                                       : ">=5.3.9",
+        "symfony/symfony"                           : "2.8.x-dev",
+        "symfony/assetic-bundle"                    : "~2.6",
+        "symfony/monolog-bundle"                    : "~2.7",
+        "symfony/swiftmailer-bundle"                : "~2.3",
+        "twig/twig"                                 : "~1.22",
         "doctrine/orm"                              : "~2.4",
         "doctrine/dbal"                             : "~2.4",
         "doctrine/doctrine-bundle"                  : "~1.5",
@@ -16,20 +23,15 @@
         "sensio/distribution-bundle"                : "~3.0",
         "sensio/framework-extra-bundle"             : "~3.0",
         "knplabs/knp-menu-bundle"                   : "~2.0",
-        "symfony/assetic-bundle"                    : "~2.6",
-        "symfony/monolog-bundle"                    : "~2.7",
-        "symfony/swiftmailer-bundle"                : "~2.3",
-        "symfony/symfony"                           : "2.8.x-dev",
         "friendsofsymfony/user-bundle"              : "2.0.x-dev",
-        "twig/extensions"                           : "~1.2",
         "sonata-project/core-bundle"                : "~2.3",
         "sonata-project/admin-bundle"               : "^2.4@dev",
         "sonata-project/doctrine-orm-admin-bundle"  : "^2.4@dev"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit" : "4.5.0"
     },
-    "minimum-stability": "dev",
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
