@@ -3,8 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Traits\NameSlugTrait;
-use AppBundle\Entity\Traits\ArchetypeTrait;
+use CoreBundle\Entity\Traits\NameSlugTrait;
+use CoreBundle\Entity\Traits\ArchetypeTrait;
+use CoreBundle\Entity\Traits\IdentifiableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Archetype.
@@ -15,25 +17,7 @@ use AppBundle\Entity\Traits\ArchetypeTrait;
  */
 class Archetype
 {
+    use IdentifiableTrait;
     use NameSlugTrait;
     use ArchetypeTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }

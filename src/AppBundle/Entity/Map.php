@@ -3,7 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Traits\NameSlugTrait;
+use CoreBundle\Entity\Traits\NameSlugTrait;
+use CoreBundle\Entity\Traits\IdentifiableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,16 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Map
 {
+    use IdentifiableTrait;
     use NameSlugTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var int
@@ -58,30 +51,6 @@ class Map
     public function __construct()
     {
         $this->mapTiles = new ArrayCollection();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get id.
-     *
-     * @param int $id
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

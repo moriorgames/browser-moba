@@ -1,9 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\Traits;
-
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+namespace CoreBundle\Entity\Traits;
 
 /**
  * Class ArchetypeTrait.

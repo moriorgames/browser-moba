@@ -32,6 +32,7 @@ class AppKernel extends Kernel
 
             // My bundles
             new AppBundle\AppBundle(),
+            new CoreBundle\CoreBundle(),
             new MoriorGames\UserBundle\UserBundle(),
         ];
 

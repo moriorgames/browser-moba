@@ -4,7 +4,8 @@ namespace AppBundle\Entity;
 
 use ReflectionClass;
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Traits\NameSlugTrait;
+use CoreBundle\Entity\Traits\NameSlugTrait;
+use CoreBundle\Entity\Traits\IdentifiableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -16,14 +17,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Image
 {
+    use IdentifiableTrait;
     use NameSlugTrait;
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -34,16 +29,6 @@ class Image
      * @Assert\File(maxSize="6000000")
      */
     private $file;
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return null|string

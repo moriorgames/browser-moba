@@ -1,9 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\Traits;
-
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+namespace CoreBundle\Entity\Traits;
 
 /**
  * Class NameSlugTrait.
@@ -68,8 +65,37 @@ trait NameSlugTrait
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = $this->slugify($slug);
 
         return $this;
+    }
+
+    /**
+     * @param $text
+     *
+     * @return mixed|string
+     */
+    private function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }
