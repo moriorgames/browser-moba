@@ -15,12 +15,11 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
 
         $menu->addChild('menu.homepage', ['route' => 'homepage']);
-        $menu->addChild('menu.map', ['route' => 'map']);
-        $menu->addChild('menu.archetype', ['route' => 'archetype']);
 
         // Temporary
         $menu->addChild('menu.login', ['route' => 'fos_user_security_login']);
-        $menu->addChild('admin.dashboard', ['route' => 'sonata_admin_dashboard']);
+        $menu->addChild('menu.register', ['route' => 'fos_user_registration_register']);
+        $menu->addChild('menu.admin', ['route' => 'sonata_admin_dashboard']);
 
         return $menu;
     }

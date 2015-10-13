@@ -47,6 +47,7 @@ sonata_admin:
                 label: Content
                 items:
                     - app.archetype.admin
+                    - app.image.admin
 
 #            Classification:
 #                label: Clasificación

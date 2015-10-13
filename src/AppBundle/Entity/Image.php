@@ -58,11 +58,25 @@ class Image
     /**
      * @return null|string
      */
-    public function getWebPath()
+    public function getPath()
     {
         return null === $this->path
             ? null
             : $this->getUploadDir() . '/' . $this->path;
+    }
+
+    /**
+     * Sets path.
+     *
+     * @param string $file
+     *
+     * @return $this
+     */
+    public function setPath($file = null)
+    {
+        $this->path = $file;
+
+        return $this;
     }
 
     /**
@@ -89,10 +103,14 @@ class Image
      * Sets file.
      *
      * @param UploadedFile $file
+     *
+     * @return $this
      */
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
+
+        return $this;
     }
 
     /**

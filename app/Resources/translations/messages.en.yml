@@ -18,7 +18,6 @@ action:
     save: Save changes
     create: Create
     back_to_list: Back to list
-    sign_in: Sign in
     browse_app: Browse application
     browse_admin: Browse backend
 
@@ -37,10 +36,10 @@ label:
 
 menu:
     homepage: Homepage
-    map: Maps
-    archetype: Archetypes
-    admin: Backend
+    login: Login
+    register: Register
     logout: Logout
+    admin: Admin Dashboard
 
 help:
     app_description: This is a <strong>demo application</strong> built in the Symfony Framework to illustrate the recommended way of developing Symfony applications.
