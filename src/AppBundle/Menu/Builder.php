@@ -19,6 +19,7 @@ class Builder extends ContainerAware
         // Temporary
         $menu->addChild('menu.login', ['route' => 'fos_user_security_login']);
         $menu->addChild('menu.register', ['route' => 'fos_user_registration_register']);
+        $menu->addChild('menu.logout', ['route' => 'fos_user_security_logout']);
         $menu->addChild('menu.admin', ['route' => 'sonata_admin_dashboard']);
 
         return $menu;

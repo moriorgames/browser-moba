@@ -43,12 +43,18 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         $this->session = $session;
     }
 
+    /**
+     * @param Request        $request
+     * @param TokenInterface $token
+     *
+     * @return RedirectResponse
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         /** @var User $user */
-        $user = $this->security->getToken()->getUser();
+        $user = $token->getUser();
         $response = new RedirectResponse(
-            $this->router->generate('fos_user_profile_show')
+            $this->router->generate('game_homepage')
         );
 
         // If the user is an admin redirect to dashboard

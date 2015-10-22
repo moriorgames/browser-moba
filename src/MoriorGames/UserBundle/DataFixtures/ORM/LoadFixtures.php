@@ -35,15 +35,27 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
 
     private function loadUsers(ObjectManager $manager)
     {
-        $user = new User();
-        $user
-            ->setUsername('Morior')
-            ->setEmail('moriorgames@gmail.com')
-            ->setPlainPassword('nomejodas')
-            ->setRoles(['ROLE_SUPER_ADMIN'])
-            ->setEnabled(true);
+        $dataProvider = $this->dataProvider();
+        foreach ($dataProvider as $data) {
+            $user = new User();
+            $user
+                ->setUsername($data[0])
+                ->setEmail($data[1])
+                ->setPlainPassword($data[2])
+                ->setRoles($data[3])
+                ->setEnabled($data[4]);
 
-        $manager->persist($user);
+            $manager->persist($user);
+        }
+
         $manager->flush();
+    }
+
+    private function dataProvider()
+    {
+        return [
+            ['Morior', 'moriorgames@gmail.com', 'nomejodas', ['ROLE_SUPER_ADMIN'], true],
+            ['Pruebas', 'pruebas@browsermoba.com', 'prueba', ['ROLE_USER'], true],
+        ];
     }
 }

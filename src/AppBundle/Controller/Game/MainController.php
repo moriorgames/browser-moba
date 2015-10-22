@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Game;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,20 +9,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller used to manage blog contents in the public part of the site.
+ * Controller in charge to render the main pages of the Game
  *
- * @Route("/")
+ * @Route("/game/main")
  */
-class DefaultController extends Controller
+class MainController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="game_homepage")
      * @Method("GET")
      *
      * @return Response
      */
     public function indexAction()
     {
-        return $this->render('default/homepage.html.twig');
+        return $this->render(':Game/Main:homepage.html.twig');
     }
 }

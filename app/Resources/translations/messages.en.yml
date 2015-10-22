@@ -85,3 +85,12 @@ archetype:
 
     form:
         new_archetype: + New archetype
+
+game:
+    main:
+        title_homepage: Welcome to the game
+        play_cta: Welcome to Broser Moba, start enjoying NOW!
+        button_play: Play Now!
+        last_news: Last news
+        events: Events
+        shop: Shop
