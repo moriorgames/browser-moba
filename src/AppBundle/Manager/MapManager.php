@@ -8,7 +8,7 @@ use AppBundle\Entity\MapTile;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Repository\MapRepository;
-use AppBundle\Manager\Interfaces\ManagerInterface;
+use CoreBundle\Manager\Interfaces\ManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**

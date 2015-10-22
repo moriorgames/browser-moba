@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Manager\Interfaces;
+namespace CoreBundle\Manager\Interfaces;
 
 /**
  * Interface ManagerInterface.

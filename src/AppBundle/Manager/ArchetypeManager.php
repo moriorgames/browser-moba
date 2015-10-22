@@ -5,7 +5,7 @@ namespace AppBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Archetype;
 use AppBundle\Repository\ArchetypeRepository;
-use AppBundle\Manager\Interfaces\ManagerInterface;
+use CoreBundle\Manager\Interfaces\ManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
