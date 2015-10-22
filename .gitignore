@@ -17,6 +17,7 @@ app/logs/*
 # Parameters
 app/config/parameters.yml
 app/config/parameters.ini
+app/AppKernel.php
 
 # Managed by Composer
 app/bootstrap.php.cache
