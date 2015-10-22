@@ -1,5 +1,15 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% trans_default_domain 'UserBundle' %}
 
 {% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST"
+          class="fos_user_profile_edit">
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
+        </div>
+    </form>
+
 {% endblock fos_user_content %}

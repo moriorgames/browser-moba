@@ -3,22 +3,26 @@
 {% trans_default_domain 'UserBundle' %}
 
 {% block fos_user_content %}
-<div id="login-box">
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
-<form class="form login" action="{{ path('fos_user_security_check') }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <div id="login-box">
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans }}" required="required" />
+        <form class="form login" action="{{ path('fos_user_security_check') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-    <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}"  />
+            <input type="text" id="username" name="_username" value="{{ last_username }}"
+                   placeholder="{{ 'security.login.username'|trans }}" required="required"/>
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            <input type="password" id="password" name="_password" required="required"
+                   placeholder="{{ 'security.login.password'|trans }}"/>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
-</div>
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
+        </form>
+    </div>
+
 {% endblock fos_user_content %}
