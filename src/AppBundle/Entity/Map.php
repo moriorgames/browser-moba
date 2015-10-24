@@ -44,10 +44,8 @@ class Map
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MapTile", mappedBy="map", cascade={"persist", "remove"})
+     *
      */
-    protected $mapTiles;
-
     public function __construct()
     {
         $this->mapTiles = new ArrayCollection();
