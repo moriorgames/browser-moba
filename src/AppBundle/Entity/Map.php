@@ -44,14 +44,6 @@ class Map
     private $enabled;
 
     /**
-     *
-     */
-    public function __construct()
-    {
-        $this->mapTiles = new ArrayCollection();
-    }
-
-    /**
      * @return int
      */
     public function getHeight()
@@ -109,37 +101,5 @@ class Map
         $this->enabled = $enabled;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMapTiles()
-    {
-        return $this->mapTiles;
-    }
-
-    /**
-     * Add tiles to map.
-     *
-     * @param MapTile $mapTiles
-     *
-     * @return $this
-     */
-    public function addMapTiles(MapTile $mapTiles)
-    {
-        $this->mapTiles->add($mapTiles);
-
-        return $this;
-    }
-
-    /**
-     * Remove postHasMedias.
-     *
-     * @param MapTile $mapTiles
-     */
-    public function removeMapTiles(MapTile $mapTiles)
-    {
-        $this->mapTiles->removeElement($mapTiles);
     }
 }
