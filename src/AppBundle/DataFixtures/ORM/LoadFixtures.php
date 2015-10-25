@@ -2,11 +2,10 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Map;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 /**
  * Defines the sample data to load in the database when running the unit and
@@ -20,30 +19,28 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class LoadFixtures implements FixtureInterface, ContainerAwareInterface
 {
-    /** @var ContainerInterface */
+    /**
+     * @var ContainerInterface
+     */
     private $container;
 
-    public function load(ObjectManager $manager)
-    {
-        $this->loadMaps($manager);
-    }
-
+    /**
+     * @param ContainerInterface|null $container
+     */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
 
-    private function loadMaps(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     */
+    public function load(ObjectManager $manager)
     {
-        $map = new Map();
-        $map
-            ->setName('Base Map')
-            ->setSlug('base-map')
-            ->setEnabled(true)
-            ->setHeight(17)
-            ->setWidth(10);
+        $archetypes = new ArchetypeFixtures();
+        $archetypes->loadArchetypes($manager);
 
-        $manager->persist($map);
-        $manager->flush();
+        $maps = new MapFixtures();
+        $maps->loadMaps($manager);
     }
 }
