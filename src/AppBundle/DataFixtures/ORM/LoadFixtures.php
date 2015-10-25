@@ -42,5 +42,8 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
 
         $maps = new MapFixtures();
         $maps->loadMaps($manager);
+
+        $battle = new BattleFixtures();
+        $battle->loadBattles($manager);
     }
 }

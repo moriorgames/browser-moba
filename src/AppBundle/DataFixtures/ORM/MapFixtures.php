@@ -10,6 +10,9 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class MapFixtures
 {
+    /**
+     * @param ObjectManager $manager
+     */
     public function loadMaps(ObjectManager $manager)
     {
         $map = new Map();
