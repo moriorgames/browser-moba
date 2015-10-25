@@ -2,8 +2,10 @@
 
 namespace AppBundle\Admin;
 
+use DateTime;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
+use AppBundle\Entity\Image as ImageUpload;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
@@ -24,8 +26,7 @@ class Image extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('slug')
-            ->add('path');
+            ->add('path', 'string', ['template' => ':Admin:templates/image-list.html.twig']);
     }
 
     /**
@@ -35,8 +36,8 @@ class Image extends Admin
     {
         $formMapper
             ->add('name', 'text')
-            ->add('slug', 'text')
             ->add('path', 'text')
+            ->add('file', 'file', ['required' => false])
             ->end();
     }
 
@@ -46,5 +47,35 @@ class Image extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
+    }
+
+    /**
+     * @param ImageUpload $image
+     *
+     * @return mixed|void
+     */
+    public function prePersist($image)
+    {
+        $this->manageFileUpload($image);
+    }
+
+    /**
+     * @param ImageUpload $image
+     *
+     * @return mixed|void
+     */
+    public function preUpdate($image)
+    {
+        $this->manageFileUpload($image);
+    }
+
+    /**
+     * @param ImageUpload $image
+     */
+    private function manageFileUpload(ImageUpload $image)
+    {
+        if ($image->getFile()) {
+            $image->setUpdatedAt(new DateTime());
+        }
     }
 }
