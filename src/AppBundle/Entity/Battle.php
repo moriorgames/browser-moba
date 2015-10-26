@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Entity\Traits\NameSlugTrait;
 use CoreBundle\Entity\Traits\DateTimeTrait;
 use CoreBundle\Entity\Traits\IdentifiableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,6 +31,21 @@ class Battle
     private $battleType;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Hero", mappedBy="battle", orphanRemoval=true)
+     */
+    private $battleHeroes;
+
+    /**
+     * Create the array collection instance to save heroes to combat
+     */
+    public function __construct()
+    {
+        $this->battleHeroes = new ArrayCollection();
+    }
+
+    /**
      * @return mixed
      */
     public function getBattleType()
@@ -48,5 +64,39 @@ class Battle
         $this->battleType = $battleType;
 
         return $this;
+    }
+
+    /**
+     * Add Hero.
+     *
+     * @param Hero $hero
+     *
+     * @return $this
+     */
+    public function addBattleHeroes(Hero $hero)
+    {
+        $this->battleHeroes->add($hero);
+
+        return $this;
+    }
+
+    /**
+     * Remove Hero.
+     *
+     * @param Hero $hero
+     */
+    public function removeBattleHeroes(Hero $hero)
+    {
+        $this->battleHeroes->removeElement($hero);
+    }
+
+    /**
+     * Get BattleHeroes.
+     *
+     * @return ArrayCollection
+     */
+    public function getBattleHeroes()
+    {
+        return $this->battleHeroes;
     }
 }

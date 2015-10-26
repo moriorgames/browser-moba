@@ -2,12 +2,12 @@
 
 namespace AppBundle\Tests\Entity;
 
+use AppBundle\Entity\Hero;
 use Doctrine\ORM\EntityManager;
-use AppBundle\Entity\Character;
 use CoreBundle\Tests\Traits\EntityManagerTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CharacterTest extends WebTestCase
+class HeroTest extends WebTestCase
 {
     use EntityManagerTrait;
 
@@ -45,7 +45,7 @@ class CharacterTest extends WebTestCase
         $name = 'Name-For-The-Test';
 
         // First create the entity
-        $this->object = new Character();
+        $this->object = new Hero();
         $this->object
             ->setArmor(1)
             ->setHitPoints(1)
@@ -60,10 +60,10 @@ class CharacterTest extends WebTestCase
         $this->em->flush();
 
         $entity = $this->em
-            ->getRepository('AppBundle:Character')
+            ->getRepository('AppBundle:Hero')
             ->findOneBy(['name' => $name]);
 
-        $this->assertTrue($entity instanceof Character);
+        $this->assertTrue($entity instanceof Hero);
         $this->assertTrue($entity->getName() === $name);
     }
 }

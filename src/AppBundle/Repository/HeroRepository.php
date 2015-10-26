@@ -7,6 +7,6 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class ArchetypeRepository.
  */
-class CharacterRepository extends EntityRepository
+class HeroRepository extends EntityRepository
 {
 }
