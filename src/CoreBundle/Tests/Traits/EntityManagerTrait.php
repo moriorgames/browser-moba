@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManager;
 trait EntityManagerTrait
 {
     /**
-     * Creates an entity manager in the test classes
+     * Creates an entity manager in the test classes.
      *
      * @return EntityManager
      */

@@ -119,7 +119,7 @@ class AddUserCommand extends ContainerAwareCommand
             $username = $console->ask($input, $output, $question);
             $input->setArgument('username', $username);
         } else {
-            $output->writeln(' > <info>Username</info>: ' . $username);
+            $output->writeln(' > <info>Username</info>: '.$username);
         }
 
         // Ask for the password if it's not defined
@@ -133,7 +133,7 @@ class AddUserCommand extends ContainerAwareCommand
             $password = $console->ask($input, $output, $question);
             $input->setArgument('password', $password);
         } else {
-            $output->writeln(' > <info>Password</info>: ' . str_repeat('*', strlen($password)));
+            $output->writeln(' > <info>Password</info>: '.str_repeat('*', strlen($password)));
         }
 
         // Ask for the email if it's not defined
@@ -146,7 +146,7 @@ class AddUserCommand extends ContainerAwareCommand
             $email = $console->ask($input, $output, $question);
             $input->setArgument('email', $email);
         } else {
-            $output->writeln(' > <info>Email</info>: ' . $email);
+            $output->writeln(' > <info>Email</info>: '.$email);
         }
     }
 
@@ -186,7 +186,6 @@ class AddUserCommand extends ContainerAwareCommand
 
         $output->writeln('');
         $output->writeln(sprintf('[OK] %s was successfully created: %s (%s)', $isAdmin ? 'Administrator user' : 'User', $user->getUsername(), $user->getEmail()));
-
 
         $finishTime = microtime(true);
         $elapsedTime = $finishTime - $startTime;

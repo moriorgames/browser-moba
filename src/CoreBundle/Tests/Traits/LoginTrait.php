@@ -19,5 +19,4 @@ trait LoginTrait
             'PHP_AUTH_PW' => PHPUNIT_ADMIN_PASS,
         ]);
     }
-
 }

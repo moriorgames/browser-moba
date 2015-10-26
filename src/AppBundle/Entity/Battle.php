@@ -38,7 +38,7 @@ class Battle
     private $battleHeroes;
 
     /**
-     * Create the array collection instance to save heroes to combat
+     * Create the array collection instance to save heroes to combat.
      */
     public function __construct()
     {
@@ -50,7 +50,6 @@ class Battle
      */
     public function getBattleType()
     {
-
         return $this->battleType;
     }
 

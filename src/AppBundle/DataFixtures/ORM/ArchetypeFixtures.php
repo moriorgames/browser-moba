@@ -19,7 +19,6 @@ class ArchetypeFixtures
     {
         $names = ['dps', 'tank', 'healer'];
         foreach ($names as $name) {
-
             $archetype = new Archetype();
             $archetype
                 ->setArmor(1)
@@ -31,7 +30,6 @@ class ArchetypeFixtures
                 ->setPhysicalDamage(1)
                 ->setSlug('slug');
             $manager->persist($archetype);
-
         }
 
         $manager->flush();

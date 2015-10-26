@@ -70,6 +70,7 @@ class MapManager implements ManagerInterface
 
     /**
      * @todo this function has to be implemented
+     *
      * @param Map $map
      *
      * @return array

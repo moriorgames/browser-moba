@@ -25,7 +25,7 @@ class BattleTest extends WebTestCase
 
     /**
      * Call this method to insert some fixtures
-     * Its called before the execution of each test
+     * Its called before the execution of each test.
      */
     public function setUp()
     {
@@ -34,7 +34,7 @@ class BattleTest extends WebTestCase
 
     /**
      * Call this method delete the inserted fixture
-     * Its called after the execution of each test
+     * Its called after the execution of each test.
      */
     public function tearDown()
     {

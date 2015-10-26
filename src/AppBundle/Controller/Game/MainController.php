@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller in charge to render the main pages of the Game
+ * Controller in charge to render the main pages of the Game.
  *
  * @Route("/game/main")
  */
