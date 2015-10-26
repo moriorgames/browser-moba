@@ -47,15 +47,15 @@ class HeroTest extends WebTestCase
         // First create the entity
         $this->object = new Hero();
         $this->object
-            ->setArmor(1)
-            ->setHitPoints(1)
-            ->setMagicDamage(1)
-            ->setMagicPoints(1)
-            ->setMagicResistance(1)
             ->setName($name)
+            ->setSlug($name)
+            ->setHitPoints(1)
+            ->setMagicPoints(1)
+            ->setMagicDamage(1)
             ->setPhysicalDamage(1)
-            ->setExperience(1)
-            ->setSlug('slug');
+            ->setArmor(1)
+            ->setMagicResistance(1)
+            ->setExperience(1);
         $this->em->persist($this->object);
         $this->em->flush();
 

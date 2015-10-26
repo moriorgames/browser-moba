@@ -20,4 +20,35 @@ class Archetype
     use IdentifiableTrait;
     use NameSlugTrait;
     use ArchetypeTrait;
+
+    /**
+     * This number indicates if an Archetype has to be nerfed or not
+     * as much stability points, more changes to nerf.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $stability;
+
+    /**
+     * @return int
+     */
+    public function getStability()
+    {
+        return $this->stability;
+    }
+
+    /**
+     * @param int $stability
+     *
+     * @return $this
+     */
+    public function setStability($stability)
+    {
+        $this->stability = $stability;
+
+        return $this;
+    }
 }

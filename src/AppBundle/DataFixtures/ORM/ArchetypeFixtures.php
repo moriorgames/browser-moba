@@ -21,14 +21,15 @@ class ArchetypeFixtures
         foreach ($names as $name) {
             $archetype = new Archetype();
             $archetype
-                ->setArmor(1)
-                ->setHitPoints(1)
-                ->setMagicDamage(1)
-                ->setMagicPoints(1)
-                ->setMagicResistance(1)
                 ->setName($name)
+                ->setSlug($name)
+                ->setHitPoints(1)
+                ->setMagicPoints(1)
+                ->setMagicDamage(1)
                 ->setPhysicalDamage(1)
-                ->setSlug('slug');
+                ->setArmor(1)
+                ->setMagicResistance(1)
+                ->setStability(1);
             $manager->persist($archetype);
         }
 

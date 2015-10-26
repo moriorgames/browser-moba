@@ -48,7 +48,7 @@ class MapTest extends WebTestCase
         $this->object = new Map();
         $this->object
             ->setName($name)
-            ->setSlug('slug')
+            ->setSlug($name)
             ->setHeight(1)
             ->setWidth(1)
             ->setEnabled(true);
