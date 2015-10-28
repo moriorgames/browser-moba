@@ -56,6 +56,7 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         return [
             ['Morior', 'moriorgames@gmail.com', 'nomejodas', ['ROLE_SUPER_ADMIN'], true],
             ['Pruebas', 'pruebas@browsermoba.com', 'prueba', ['ROLE_USER'], true],
+            ['Sergio', 'sergio.mbravo@gmail.com', '1234', ['ROLE_USER'], true],
         ];
     }
 }
