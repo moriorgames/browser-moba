@@ -24,6 +24,16 @@ trait ArchetypeTrait
     private $magicDamage;
 
     /**
+     * Amount of Damage per second to structures.
+     *
+     * @var int
+     *
+     * @ORM\Column(name="structural_damage", type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $structuralDamage;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="hit_points", type="integer", options={"default"=0})
@@ -171,6 +181,26 @@ trait ArchetypeTrait
     public function setMagicResistance($magicResistance)
     {
         $this->magicResistance = $magicResistance;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStructuralDamage()
+    {
+        return $this->structuralDamage;
+    }
+
+    /**
+     * @param int $structuralDamage
+     *
+     * @return $this
+     */
+    public function setStructuralDamage($structuralDamage)
+    {
+        $this->structuralDamage = $structuralDamage;
 
         return $this;
     }

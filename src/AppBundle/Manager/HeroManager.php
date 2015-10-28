@@ -2,16 +2,16 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\Hero;
 use Doctrine\ORM\EntityManager;
-use AppBundle\Entity\Archetype;
-use AppBundle\Repository\ArchetypeRepository;
+use AppBundle\Repository\HeroRepository;
 use CoreBundle\Manager\Interfaces\ManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ArchetypeManager.
+ * Class HeroManager.
  */
-class ArchetypeManager implements ManagerInterface
+class HeroManager implements ManagerInterface
 {
     /**
      * @var EntityManager
@@ -27,30 +27,28 @@ class ArchetypeManager implements ManagerInterface
     }
 
     /**
-     * Get Archetype by id or throw exception.
-     *
      * @param int $id
      *
-     * @return Archetype|NotFoundHttpException
+     * @return Hero|NotFoundHttpException
      */
     public function getById($id)
     {
-        /** @var Archetype $archetype */
-        $archetype = $this->getRepository()
+        /** @var Hero $hero */
+        $hero = $this->getRepository()
             ->findOneBy(['id' => $id]);
 
-        if (!$archetype instanceof Archetype) {
-            throw new NotFoundHttpException('Archetype not found!');
+        if (!$hero instanceof Hero) {
+            throw new NotFoundHttpException('Hero not found!');
         }
 
-        return $archetype;
+        return $hero;
     }
 
     /**
-     * @return ArchetypeRepository
+     * @return HeroRepository
      */
     public function getRepository()
     {
-        return $this->em->getRepository('AppBundle:Archetype');
+        return $this->em->getRepository('AppBundle:Hero');
     }
 }

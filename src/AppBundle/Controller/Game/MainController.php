@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller\Game;
 
-use AppBundle\Admin\Archetype;
+use AppBundle\Entity\Archetype;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,8 +30,8 @@ class MainController extends Controller
         $manager = $this->get('app.battle_manager');
 
         return [
-            'user' => $this->getUser(),
-            'isUserInBattle' => $manager->isUserInBattle($this->getUser())
+            'user'           => $this->getUser(),
+            'isUserInBattle' => $manager->isUserInBattle($this->getUser()),
         ];
     }
 
@@ -53,24 +53,25 @@ class MainController extends Controller
      * @Route("/update-choose-hero", name="game_main_update_choose_hero")
      * @Method("POST")
      *
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function updateChooseHeroAction(Request $request)
     {
-        if ($request->getMethod() === 'POST') {
+        $archetypeManager = $this->get('app.archetype_manager');
+        $archetype = $archetypeManager->getRepository()->find(
+            $request->request->get('heroId')
+        );
 
-            $archetypeManager = $this->get('app.archetype_manager');
-            $archetype = $archetypeManager->getRepository()->find(
-                $request->request->get('heroId')
+        if ($archetype instanceof Archetype) {
+
+            $heroManager = $this->get('app.hero_manager');
+            $heroManager->getRepository()->createHeroFromArchetype(
+                $archetype, $this->getUser()
             );
 
-            if ($archetype instanceof Archetype) {
-
-                $battleManager = $this->get('app.battle_manager');
-                $battleManager->createBattle();
-
-                return $this->redirectToRoute('game_battle');
-            }
+            return $this->redirectToRoute('game_main_homepage');
         }
 
         return $this->redirectToRoute('game_main_choose_hero');

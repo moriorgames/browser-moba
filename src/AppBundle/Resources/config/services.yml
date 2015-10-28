@@ -10,6 +10,11 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
 
+    app.hero_manager:
+        class: AppBundle\Manager\HeroManager
+        arguments:
+            - @doctrine.orm.entity_manager
+
     app.battle_manager:
         class: AppBundle\Manager\BattleManager
         arguments:

@@ -53,6 +53,7 @@ class HeroTest extends WebTestCase
             ->setMagicPoints(1)
             ->setMagicDamage(1)
             ->setPhysicalDamage(1)
+            ->setStructuralDamage(1)
             ->setArmor(1)
             ->setMagicResistance(1)
             ->setExperience(1);
