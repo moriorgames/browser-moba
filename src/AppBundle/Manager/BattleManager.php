@@ -3,7 +3,9 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Battle;
+use CoreBundle\Constants;
 use Doctrine\ORM\EntityManager;
+use MoriorGames\UserBundle\Entity\User;
 use AppBundle\Repository\BattleRepository;
 use CoreBundle\Manager\Interfaces\ManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -53,9 +55,26 @@ class BattleManager implements ManagerInterface
     }
 
     /**
+     * @param User $user
+     *
      * @return bool
      */
-    public function isUserInBattle()
+    public function isUserInBattle(User $user)
     {
+        return $this->getRepository()->isUserInBattle($user);
+    }
+
+    /**
+     *
+     */
+    public function createBattle()
+    {
+        $battle = new Battle();
+        $battle
+            ->setName('new battle')
+            ->setSlug('new battle')
+            ->setBattleType(Constants::BATTLE_TYPE_5_VS_5);
+        $this->em->persist($battle);
+        $this->em->flush();
     }
 }

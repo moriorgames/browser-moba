@@ -13,12 +13,13 @@
                 </p>
 
                 <p class="text-center">
-
-                    <a class="btn btn-danger btn-lg" href="{{ path('homepage') }}">
+                    <a class="btn btn-danger btn-lg"
+                       href="{{ isUserInBattle ? path('game_battle') : path('game_main_choose_hero') }}">
                         <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
                         {{ 'game.main.button_play'|trans }}
                     </a>
                 </p>
+
             </div>
         </div>
         <div class="col-sm-6">

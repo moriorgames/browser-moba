@@ -20,6 +20,7 @@ action:
     back_to_list: Back to list
     browse_app: Browse application
     browse_admin: Browse backend
+    choose_hero: Choose Hero
 
 label:
     create_post: Create post

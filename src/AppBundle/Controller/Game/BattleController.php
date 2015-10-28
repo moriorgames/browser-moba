@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class BattleController.
+ *
+ * @Route("/game/battle")
  */
 class BattleController extends Controller
 {

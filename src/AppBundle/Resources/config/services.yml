@@ -9,3 +9,8 @@ services:
         class: AppBundle\Manager\ArchetypeManager
         arguments:
             - @doctrine.orm.entity_manager
+
+    app.battle_manager:
+        class: AppBundle\Manager\BattleManager
+        arguments:
+            - @doctrine.orm.entity_manager

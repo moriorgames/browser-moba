@@ -54,7 +54,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         /** @var User $user */
         $user = $token->getUser();
         $response = new RedirectResponse(
-            $this->router->generate('game_homepage')
+            $this->router->generate('game_main_homepage')
         );
 
         // If the user is an admin redirect to dashboard

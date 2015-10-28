@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller\Game;
 
+use AppBundle\Admin\Archetype;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,11 +27,16 @@ class MainController extends Controller
      */
     public function homepageAction()
     {
-        return ['user' => $this->getUser()];
+        $manager = $this->get('app.battle_manager');
+
+        return [
+            'user' => $this->getUser(),
+            'isUserInBattle' => $manager->isUserInBattle($this->getUser())
+        ];
     }
 
     /**
-     * @Route("/", name="game_main_choose_hero")
+     * @Route("/choose-hero", name="game_main_choose_hero")
      * @Method("GET")
      * @Template()
      *
@@ -36,18 +44,35 @@ class MainController extends Controller
      */
     public function chooseHeroAction()
     {
-        return [];
+        $manager = $this->get('app.archetype_manager');
+
+        return ['archetypes' => $manager->getRepository()->findAll()];
     }
 
     /**
-     * @Route("/", name="game_main_update_choose_hero")
+     * @Route("/update-choose-hero", name="game_main_update_choose_hero")
      * @Method("POST")
-     * @Template()
      *
-     * @return array
+     * @return RedirectResponse
      */
-    public function updateChooseHeroAction()
+    public function updateChooseHeroAction(Request $request)
     {
-        return [];
+        if ($request->getMethod() === 'POST') {
+
+            $archetypeManager = $this->get('app.archetype_manager');
+            $archetype = $archetypeManager->getRepository()->find(
+                $request->request->get('heroId')
+            );
+
+            if ($archetype instanceof Archetype) {
+
+                $battleManager = $this->get('app.battle_manager');
+                $battleManager->createBattle();
+
+                return $this->redirectToRoute('game_battle');
+            }
+        }
+
+        return $this->redirectToRoute('game_main_choose_hero');
     }
 }
