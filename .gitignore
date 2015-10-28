@@ -36,6 +36,3 @@ web/app_dev.php
 # PHPUnit and some xml files
 phpunit.xml
 phpdox.html
-
-# Build data
-build/
