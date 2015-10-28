@@ -12,7 +12,7 @@ final class Constants
     const FIGHTER_PLAYER = 'PLAYER';
     const FIGHTER_NPC = 'NPC';
 
-    public static function FIGHTERS()
+    public static function fighters()
     {
         return [
             self::FIGHTER_PLAYER,

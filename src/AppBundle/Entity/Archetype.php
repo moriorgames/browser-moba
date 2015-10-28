@@ -3,8 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use CoreBundle\Entity\Traits\FighterTrait;
 use CoreBundle\Entity\Traits\NameSlugTrait;
-use CoreBundle\Entity\Traits\ArchetypeTrait;
 use CoreBundle\Entity\Traits\IdentifiableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,7 +19,7 @@ class Archetype
 {
     use IdentifiableTrait;
     use NameSlugTrait;
-    use ArchetypeTrait;
+    use FighterTrait;
 
     /**
      * This number indicates if an Archetype has to be nerfed or not

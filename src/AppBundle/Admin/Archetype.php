@@ -35,13 +35,16 @@ class Archetype extends Admin
     {
         $formMapper
             ->add('name', 'text')
-            ->add('slug', 'text')
             ->add('physicalDamage', 'integer')
-            ->add('magicDamage', 'integer')
+            ->add('MagicDamage', 'integer')
+            ->add('structuralDamage', 'integer')
             ->add('hitPoints', 'integer')
             ->add('magicPoints', 'integer')
             ->add('armor', 'integer')
-            ->add('magicResistance')
+            ->add('magicResistance', 'integer')
+            ->add('agility', 'integer')
+            ->add('movement', 'integer')
+            ->add('regeneration', 'integer')
             ->end();
     }
 

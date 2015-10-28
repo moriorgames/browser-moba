@@ -6,9 +6,9 @@ use CoreBundle\Constants;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 
 /**
- * Class ArchetypeTrait.
+ * Class FighterTrait.
  */
-trait ArchetypeTrait
+trait FighterTrait
 {
     /**
      * @var int
@@ -315,7 +315,7 @@ trait ArchetypeTrait
      */
     public function setFighterType($fighterType)
     {
-        if (!in_array($fighterType, Constants::FIGHTERS())) {
+        if (!in_array($fighterType, Constants::fighters())) {
             throw new UnexpectedValueException('This fighter type is not allowed');
         }
         $this->fighterType = $fighterType;

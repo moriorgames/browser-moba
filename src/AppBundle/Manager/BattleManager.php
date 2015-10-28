@@ -6,9 +6,9 @@ use AppBundle\Entity\Battle;
 use CoreBundle\Constants;
 use Doctrine\ORM\EntityManager;
 use MoriorGames\UserBundle\Entity\User;
+use Doctrine\ORM\EntityNotFoundException;
 use AppBundle\Repository\BattleRepository;
 use CoreBundle\Manager\Interfaces\ManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class BattleManager.
@@ -32,6 +32,7 @@ class BattleManager implements ManagerInterface
      * @param int $id
      *
      * @return Battle
+     * @throws EntityNotFoundException
      */
     public function getById($id)
     {
@@ -40,7 +41,7 @@ class BattleManager implements ManagerInterface
             ->findOneBy(['id' => $id]);
 
         if (!$battle instanceof Battle) {
-            throw new NotFoundHttpException('Map not found!');
+            throw new EntityNotFoundException();
         }
 
         return $battle;

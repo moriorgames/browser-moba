@@ -42,7 +42,7 @@ class ArchetypeManager implements ManagerInterface
             ->findOneBy(['id' => $id]);
 
         if (!$archetype instanceof Archetype) {
-            throw new EntityNotFoundException('Archetype not found!');
+            throw new EntityNotFoundException();
         }
 
         return $archetype;

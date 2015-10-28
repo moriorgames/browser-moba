@@ -4,8 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MoriorGames\UserBundle\Entity\User;
+use CoreBundle\Entity\Traits\FighterTrait;
 use CoreBundle\Entity\Traits\NameSlugTrait;
-use CoreBundle\Entity\Traits\ArchetypeTrait;
 use CoreBundle\Entity\Traits\IdentifiableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,7 +20,7 @@ class Hero
 {
     use IdentifiableTrait;
     use NameSlugTrait;
-    use ArchetypeTrait;
+    use FighterTrait;
 
     /**
      * @var int

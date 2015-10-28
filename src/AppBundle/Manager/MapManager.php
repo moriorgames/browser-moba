@@ -3,11 +3,10 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Map;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Repository\MapRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use CoreBundle\Manager\Interfaces\ManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class MapManager.
@@ -32,7 +31,8 @@ class MapManager implements ManagerInterface
      *
      * @param int $id
      *
-     * @return Map|NotFoundHttpException
+     * @return Map
+     * @throws EntityNotFoundException
      */
     public function getById($id)
     {
@@ -41,7 +41,7 @@ class MapManager implements ManagerInterface
             ->findOneBy(['id' => $id]);
 
         if (!$map instanceof Map) {
-            throw new NotFoundHttpException('Map not found!');
+            throw new EntityNotFoundException();
         }
 
         return $map;
@@ -53,32 +53,5 @@ class MapManager implements ManagerInterface
     public function getRepository()
     {
         return $this->em->getRepository('AppBundle:Map');
-    }
-
-    /**
-     * @param Map $map
-     */
-    public function persistMap(Map $map)
-    {
-        try {
-            $this->em->persist($map);
-            $this->em->flush();
-        } catch (ORMException $e) {
-            echo 'Fail when persist: '.$e->getMessage()."\n";
-        }
-    }
-
-    /**
-     * @todo this function has to be implemented
-     *
-     * @param Map $map
-     *
-     * @return array
-     */
-    public function createView(Map $map)
-    {
-        $tiles = [];
-
-        return $tiles;
     }
 }

@@ -5,8 +5,8 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Hero;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Repository\HeroRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use CoreBundle\Manager\Interfaces\ManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class HeroManager.
@@ -29,7 +29,8 @@ class HeroManager implements ManagerInterface
     /**
      * @param int $id
      *
-     * @return Hero|NotFoundHttpException
+     * @return Hero
+     * @throws EntityNotFoundException
      */
     public function getById($id)
     {
@@ -38,7 +39,7 @@ class HeroManager implements ManagerInterface
             ->findOneBy(['id' => $id]);
 
         if (!$hero instanceof Hero) {
-            throw new NotFoundHttpException('Hero not found!');
+            throw new EntityNotFoundException();
         }
 
         return $hero;
