@@ -4,9 +4,9 @@ namespace AppBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Archetype;
+use Doctrine\ORM\EntityNotFoundException;
 use AppBundle\Repository\ArchetypeRepository;
 use CoreBundle\Manager\Interfaces\ManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class ArchetypeManager.
@@ -31,7 +31,9 @@ class ArchetypeManager implements ManagerInterface
      *
      * @param int $id
      *
-     * @return Archetype|NotFoundHttpException
+     * @return Archetype
+     *
+     * @throws EntityNotFoundException
      */
     public function getById($id)
     {
@@ -40,7 +42,7 @@ class ArchetypeManager implements ManagerInterface
             ->findOneBy(['id' => $id]);
 
         if (!$archetype instanceof Archetype) {
-            throw new NotFoundHttpException('Archetype not found!');
+            throw new EntityNotFoundException('Archetype not found!');
         }
 
         return $archetype;

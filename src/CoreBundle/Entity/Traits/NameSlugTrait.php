@@ -11,7 +11,7 @@ trait NameSlugTrait
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="map.blank_name")
+     * @Assert\NotBlank(message="general.blank")
      */
     private $name;
 
@@ -42,6 +42,7 @@ trait NameSlugTrait
     public function setName($name)
     {
         $this->name = $name;
+        $this->setSlug($name);
 
         return $this;
     }

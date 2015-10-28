@@ -50,7 +50,6 @@ class BattleTest extends WebTestCase
         $this->object = new Battle();
         $this->object
             ->setName($name)
-            ->setSlug($name)
             ->setUpdatedAt(new DateTime())
             ->setCreatedAt(new DateTime())
             ->setBattleType(Constants::BATTLE_TYPE_5_VS_5);
@@ -61,7 +60,7 @@ class BattleTest extends WebTestCase
             ->getRepository('AppBundle:Battle')
             ->findOneBy(['name' => $name]);
 
-        $this->assertTrue($entity instanceof Battle);
+        $this->assertInstanceOf('AppBundle\Entity\Battle', $entity);
         $this->assertTrue($entity->getName() === $name);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace CoreBundle\Entity\Traits;
 
+use CoreBundle\Constants;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+
 /**
  * Class ArchetypeTrait.
  */
@@ -66,6 +69,38 @@ trait ArchetypeTrait
     private $magicResistance;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $agility;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $movement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $regeneration;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fighter_Type", type="string", length=255)
+     * @Assert\NotBlank(message="general.blank")
+     */
+    private $fighterType;
+
+    /**
      * @return int
      */
     public function getPhysicalDamage()
@@ -101,6 +136,26 @@ trait ArchetypeTrait
     public function setMagicDamage($magicDamage)
     {
         $this->magicDamage = $magicDamage;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStructuralDamage()
+    {
+        return $this->structuralDamage;
+    }
+
+    /**
+     * @param int $structuralDamage
+     *
+     * @return $this
+     */
+    public function setStructuralDamage($structuralDamage)
+    {
+        $this->structuralDamage = $structuralDamage;
 
         return $this;
     }
@@ -188,19 +243,82 @@ trait ArchetypeTrait
     /**
      * @return int
      */
-    public function getStructuralDamage()
+    public function getAgility()
     {
-        return $this->structuralDamage;
+        return $this->agility;
     }
 
     /**
-     * @param int $structuralDamage
+     * @param int $agility
      *
      * @return $this
      */
-    public function setStructuralDamage($structuralDamage)
+    public function setAgility($agility)
     {
-        $this->structuralDamage = $structuralDamage;
+        $this->agility = $agility;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMovement()
+    {
+        return $this->movement;
+    }
+
+    /**
+     * @param int $movement
+     *
+     * @return $this
+     */
+    public function setMovement($movement)
+    {
+        $this->movement = $movement;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRegeneration()
+    {
+        return $this->regeneration;
+    }
+
+    /**
+     * @param int $regeneration
+     *
+     * @return $this
+     */
+    public function setRegeneration($regeneration)
+    {
+        $this->regeneration = $regeneration;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFighterType()
+    {
+        return $this->fighterType;
+    }
+
+    /**
+     * @param string $fighterType
+     *
+     * @return $this
+     */
+    public function setFighterType($fighterType)
+    {
+        if (!in_array($fighterType, Constants::FIGHTERS())) {
+            throw new UnexpectedValueException('This fighter type is not allowed');
+        }
+        $this->fighterType = $fighterType;
 
         return $this;
     }

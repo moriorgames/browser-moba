@@ -30,7 +30,7 @@ class MainController extends Controller
         $manager = $this->get('app.battle_manager');
 
         return [
-            'user'           => $this->getUser(),
+            'user' => $this->getUser(),
             'isUserInBattle' => $manager->isUserInBattle($this->getUser()),
         ];
     }
@@ -65,7 +65,6 @@ class MainController extends Controller
         );
 
         if ($archetype instanceof Archetype) {
-
             $heroManager = $this->get('app.hero_manager');
             $heroManager->getRepository()->createHeroFromArchetype(
                 $archetype, $this->getUser()

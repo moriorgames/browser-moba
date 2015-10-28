@@ -22,7 +22,6 @@ class BattleFixtures
         $battle = new Battle();
         $battle
             ->setName('First battle')
-            ->setSlug('First battle')
             ->setUpdatedAt(new DateTime())
             ->setCreatedAt(new DateTime())
             ->setBattleType(Constants::BATTLE_TYPE_5_VS_5);

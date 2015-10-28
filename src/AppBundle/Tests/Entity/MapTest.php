@@ -48,7 +48,6 @@ class MapTest extends WebTestCase
         $this->object = new Map();
         $this->object
             ->setName($name)
-            ->setSlug($name)
             ->setHeight(1)
             ->setWidth(1)
             ->setEnabled(true);
@@ -59,7 +58,7 @@ class MapTest extends WebTestCase
             ->getRepository('AppBundle:Map')
             ->findOneBy(['name' => $name]);
 
-        $this->assertTrue($entity instanceof Map);
+        $this->assertInstanceOf('AppBundle\Entity\Map', $entity);
         $this->assertTrue($entity->getName() === $name);
     }
 }

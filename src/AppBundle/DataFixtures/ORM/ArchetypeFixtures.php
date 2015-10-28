@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use CoreBundle\Constants;
 use AppBundle\Entity\Archetype;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -22,14 +23,17 @@ class ArchetypeFixtures
             $archetype = new Archetype();
             $archetype
                 ->setName($name)
-                ->setSlug($name)
+                ->setPhysicalDamage(1)
+                ->setMagicDamage(1)
+                ->setStructuralDamage(1)
                 ->setHitPoints(1)
                 ->setMagicPoints(1)
-                ->setMagicDamage(1)
-                ->setPhysicalDamage(1)
-                ->setStructuralDamage(1)
                 ->setArmor(1)
                 ->setMagicResistance(1)
+                ->setAgility(1)
+                ->setMovement(1)
+                ->setRegeneration(1)
+                ->setFighterType(Constants::FIGHTER_PLAYER)
                 ->setStability(1);
             $manager->persist($archetype);
         }

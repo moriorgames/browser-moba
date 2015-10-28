@@ -2,6 +2,7 @@
 
 namespace AppBundle\Tests\Entity;
 
+use CoreBundle\Constants;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Archetype;
 use CoreBundle\Tests\Traits\EntityManagerTrait;
@@ -48,14 +49,17 @@ class ArchetypeTest extends WebTestCase
         $this->object = new Archetype();
         $this->object
             ->setName($name)
-            ->setSlug($name)
+            ->setPhysicalDamage(1)
+            ->setMagicDamage(1)
+            ->setStructuralDamage(1)
             ->setHitPoints(1)
             ->setMagicPoints(1)
-            ->setMagicDamage(1)
-            ->setPhysicalDamage(1)
-            ->setStructuralDamage(1)
             ->setArmor(1)
             ->setMagicResistance(1)
+            ->setAgility(1)
+            ->setMovement(1)
+            ->setRegeneration(1)
+            ->setFighterType(Constants::FIGHTER_PLAYER)
             ->setStability(1);
         $this->em->persist($this->object);
         $this->em->flush();
@@ -64,7 +68,7 @@ class ArchetypeTest extends WebTestCase
             ->getRepository('AppBundle:Archetype')
             ->findOneBy(['name' => $name]);
 
-        $this->assertTrue($entity instanceof Archetype);
+        $this->assertInstanceOf('AppBundle\Entity\Archetype', $entity);
         $this->assertTrue($entity->getName() === $name);
     }
 }

@@ -18,7 +18,6 @@ class MapFixtures
         $map = new Map();
         $map
             ->setName('Base Map')
-            ->setSlug('base-map')
             ->setEnabled(true)
             ->setHeight(17)
             ->setWidth(10);
