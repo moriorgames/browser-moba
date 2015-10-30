@@ -22,7 +22,7 @@ class DefaultController extends Controller
      * @return Response
      */
     public function indexAction()
-    { new loquese();
+    {
         return $this->render('default/homepage.html.twig');
     }
 }
