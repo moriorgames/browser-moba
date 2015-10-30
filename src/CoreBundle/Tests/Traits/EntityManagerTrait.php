@@ -14,10 +14,9 @@ trait EntityManagerTrait
     public function createEntityManager()
     {
         self::bootKernel();
-        $em = static::$kernel->getContainer()
+
+        return static::$kernel->getContainer()
             ->get('doctrine')
             ->getManager();
-
-        return $em;
     }
 }

@@ -32,6 +32,7 @@ class MapManager implements ManagerInterface
      * @param int $id
      *
      * @return Map
+     *
      * @throws EntityNotFoundException
      */
     public function getById($id)

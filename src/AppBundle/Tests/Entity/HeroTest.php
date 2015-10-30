@@ -5,12 +5,14 @@ namespace AppBundle\Tests\Entity;
 use CoreBundle\Constants;
 use AppBundle\Entity\Hero;
 use Doctrine\ORM\EntityManager;
+use CoreBundle\Tests\Traits\LoginTrait;
 use CoreBundle\Tests\Traits\EntityManagerTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HeroTest extends WebTestCase
 {
     use EntityManagerTrait;
+    use LoginTrait;
 
     /**
      * @var EntityManager
@@ -53,7 +55,9 @@ class HeroTest extends WebTestCase
             ->setMagicDamage(1)
             ->setStructuralDamage(1)
             ->setHitPoints(1)
+            ->setHitPointsRest(1)
             ->setMagicPoints(1)
+            ->setMagicPointsRest(1)
             ->setArmor(1)
             ->setMagicResistance(1)
             ->setAgility(1)
@@ -69,6 +73,43 @@ class HeroTest extends WebTestCase
             ->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('AppBundle\Entity\Hero', $entity);
-        $this->assertTrue($entity->getName() === $name);
+        $this->assertEquals($name, $entity->getName());
+    }
+
+    /**
+     * @dataProvider archetypesIds
+     */
+    public function testCreateHeroFromArchetype($id)
+    {
+        // First get the user
+        $user = $this->getUser();
+        $this->assertInstanceOf('MoriorGames\UserBundle\Entity\User', $user);
+
+        // Then get the archetype
+        $archetype = $this->em
+            ->getRepository('AppBundle:Archetype')
+            ->find($id);
+        $this->assertInstanceOf('AppBundle\Entity\Archetype', $archetype);
+
+        // Create repository and create the hero and persist
+        $repo = $this->em->getRepository('AppBundle:Hero');
+        $this->object = $repo->createHeroFromArchetype($archetype, $user);
+        $repo->persistHero($this->object);
+
+        // Validate the entity Hero
+        $entity = $this->em
+            ->getRepository('AppBundle:Hero')
+            ->findOneBy(['name' => $archetype->getName()]);
+        $this->assertInstanceOf('AppBundle\Entity\Hero', $entity);
+        $this->assertEquals($this->object->getName(), $entity->getName());
+    }
+
+    public function archetypesIds()
+    {
+        return [
+            [1],
+            [2],
+            [3],
+        ];
     }
 }

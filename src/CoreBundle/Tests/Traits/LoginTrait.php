@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Tests\Traits;
 
+use MoriorGames\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
@@ -18,5 +19,15 @@ trait LoginTrait
             'PHP_AUTH_USER' => PHPUNIT_ADMIN_USER,
             'PHP_AUTH_PW' => PHPUNIT_ADMIN_PASS,
         ]);
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->em
+            ->getRepository('UserBundle:User')
+            ->find(1);
     }
 }

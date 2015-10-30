@@ -61,6 +61,6 @@ class BattleTest extends WebTestCase
             ->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('AppBundle\Entity\Battle', $entity);
-        $this->assertTrue($entity->getName() === $name);
+        $this->assertEquals($name, $entity->getName());
     }
 }

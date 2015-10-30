@@ -25,6 +25,22 @@ class Hero
     /**
      * @var int
      *
+     * @ORM\Column(name="hit_points_rest", type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $hitPointsRest;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="magic_points_rest", type="integer", options={"default"=0})
+     * @Assert\Type(type="integer")
+     */
+    private $magicPointsRest;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(type="integer", options={"default"=0})
      * @Assert\Type(type="integer")
      */
@@ -44,6 +60,54 @@ class Hero
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHitPointsRest()
+    {
+        return $this->hitPointsRest;
+    }
+
+    /**
+     * @param int $hitPointsRest
+     *
+     * @return $this
+     */
+    public function setHitPointsRest($hitPointsRest)
+    {
+        $this->hitPointsRest = $hitPointsRest;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMagicPointsRest()
+    {
+        return $this->magicPointsRest;
+    }
+
+    /**
+     * @param int $magicPointsRest
+     *
+     * @return $this
+     */
+    public function setMagicPointsRest($magicPointsRest)
+    {
+        $this->magicPointsRest = $magicPointsRest;
+
+        return $this;
+    }
 
     /**
      * @return int

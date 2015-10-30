@@ -32,6 +32,7 @@ class BattleManager implements ManagerInterface
      * @param int $id
      *
      * @return Battle
+     *
      * @throws EntityNotFoundException
      */
     public function getById($id)

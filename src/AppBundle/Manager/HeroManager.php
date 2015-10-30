@@ -30,6 +30,7 @@ class HeroManager implements ManagerInterface
      * @param int $id
      *
      * @return Hero
+     *
      * @throws EntityNotFoundException
      */
     public function getById($id)

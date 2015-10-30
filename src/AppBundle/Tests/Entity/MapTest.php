@@ -59,6 +59,6 @@ class MapTest extends WebTestCase
             ->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('AppBundle\Entity\Map', $entity);
-        $this->assertTrue($entity->getName() === $name);
+        $this->assertEquals($name, $entity->getName());
     }
 }

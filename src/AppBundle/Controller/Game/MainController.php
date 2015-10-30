@@ -65,10 +65,11 @@ class MainController extends Controller
         );
 
         if ($archetype instanceof Archetype) {
-            $heroManager = $this->get('app.hero_manager');
-            $heroManager->getRepository()->createHeroFromArchetype(
+            $repo = $this->get('app.hero_manager')->getRepository();
+            $hero = $repo->createHeroFromArchetype(
                 $archetype, $this->getUser()
             );
+            $repo->persistHero($hero);
 
             return $this->redirectToRoute('game_main_homepage');
         }
